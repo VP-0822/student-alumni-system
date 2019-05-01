@@ -1,0 +1,28 @@
+{
+  "name": "student-alumini-system",
+  "version": "1.0.0",
+  "description": "Student and alumini system for university.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VP-0822/student-alumini-system.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VP-0822/student-alumini-system/issues"
+  },
+  "homepage": "https://github.com/VP-0822/student-alumini-system#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.5",
+    "neo4j-driver": "^1.7.3",
+    "path": "^0.12.7"
+  }
+}
