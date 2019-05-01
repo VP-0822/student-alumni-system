@@ -1,7 +1,7 @@
-const UserMessagesModel = require('../../models/userMessages');
+const UserMessagesModel = require('../models/userMessages');
 
 exports.searchMessagesForUser = function(req, res, username, handleSuccessResponse, handleErrorResponse){
-    UserMessagesModel.find({$or: [{"sender_user_name" : username}, {"recipient_user_name" : username}]}).lean().exec(function(err, docs){
+    UserMessagesModel.find({$or: [{"sender_user_name" : username}, {"recipient_user_name" : username}]}).sort({"sendDatetime": -1}).lean().exec(function(err, docs){
         if(err)
         {
             handleErrorResponse(req, res, err)

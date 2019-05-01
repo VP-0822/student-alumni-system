@@ -23,4 +23,4 @@ const UserMessagesSchema = mongoose.Schema({
     readDatetime: Date
 });
 
-const UserMessages = module.exports = mongoose.model('userMessages', UserMessagesSchema);
+const UserMessagesModel = module.exports = mongoose.model('userMessages', UserMessagesSchema, 'userMessages');

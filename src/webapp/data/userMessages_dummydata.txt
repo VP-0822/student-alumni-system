@@ -1,2 +1,3 @@
 db.userMessages.insertOne({sender_user_name:"viraj",recipient_user_name:"akansha",message: "Hey Hi!", message_digest: "23aersd23343bdh", sendDatetime: new Date(), deliveredDatetime: new Date(), readDatetime: new Date()});
 db.userMessages.insertOne({sender_user_name:"akansha",recipient_user_name:"viraj",message: "Are you working on Information system project", message_digest: "24545aertyuyrsd23343bdh", sendDatetime: new Date(), deliveredDatetime: new Date(), readDatetime: new Date()});
+db.userMessages.insertOne({sender_user_name:"akansha",recipient_user_name:"vaibhav",message: "Let's meet tomorrow", message_digest: "8554445aertyuyrsd23343bdh", sendDatetime: new Date(), deliveredDatetime: new Date(), readDatetime: new Date()});
