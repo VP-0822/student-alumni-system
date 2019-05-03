@@ -4,9 +4,14 @@ const path=require('path');
 const mongoose= require('mongoose');
 const neo4j = require('neo4j-driver').v1;
 const database = require('./config/database');
+var redis = require('redis');
 
 //Connect mongoDB
 mongoose.connect(database.mongodb);
+
+//Connect redis
+var client = redis.createClient(database.redis_port, database.redis_host);
+
 
 //Connect Neo4J
 driver = neo4j.driver(database.neo4j, neo4j.auth.basic(database.neo4j_username, database.neo4j_password));
@@ -23,6 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 let homePage = require('./routes/home');
 app.use('/', homePage);
+
+//define routes for channels
+let channel = require('./routes/channels');
+app.use('/channel', channel);
+
 
 //define routes for literature
 let messages = require('./routes/userChat');
