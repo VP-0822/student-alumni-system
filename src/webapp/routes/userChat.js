@@ -3,11 +3,12 @@ const router = express.Router();
 
 const messageController = require('../controllers/userMessages')
 
-router.get('/messages/:username', function(req, res){
-    let username = req.params.username;
-    if(username)
+router.get('/messages', function(req, res){
+    let sender = req.query.sender;
+    let receiver = req.query.receiver;
+    if(sender && receiver)
     {
-        messageController.searchMessagesForUser(req, res, username, handleSuccessResponse, handleErrorResponse);
+        messageController.searchMessagesForUser(req, res, sender, receiver, handleSuccessResponse, handleErrorResponse);
         return;
     }
     handleErrorResponse(req, res, new Error('Invalid username'));
@@ -21,7 +22,8 @@ function handleSuccessResponse(req, res, responseData, displayMessage)
     }
     if(responseData)
     {
-        res.send(responseData)
+        //res.send(responseData);
+        res.render('userChat', responseData);
         return;
     }
     res.sendStatus(200);

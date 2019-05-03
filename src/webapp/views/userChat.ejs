@@ -1,0 +1,43 @@
+<% include partials/header %>
+    <div>
+        <div>Logged In User: <%- locals.org_receiver %> </div>
+        <div class="card" style="margin: 50px; width: 700px">
+            <div class="card-header" style="background-color: greenyellow">
+                <%- locals.org_sender %>
+            </div>
+            <div class="card-body">
+            <% locals.docs.forEach( doc => { %>
+                <% if(doc.sender_user_name === locals.org_receiver) { %>
+                <div class="row justify-content-left" style="margin-left: 250px; max-width: 300px;">
+                    <div class="col-auto mb-3">
+                        <div class="card" style="text-align: left">
+                            <div class="card-body">
+                                <span style="font-weight: 700">You:</span>
+                                <p><%- doc.message%></p>
+                            </div>
+                            <div class="card-footer">
+                                <span style="float: right"><%- doc.deliveredDatetime.toLocaleDateString("en-US") +' ' + doc.deliveredDatetime.getHours() + ':' + doc.deliveredDatetime.getMinutes() + ':' + doc.deliveredDatetime.getSeconds()%> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+                <div class="row justify-content-right" style="margin-left: 10px; max-width: 300px;">
+                    <div class="col-auto mb-3">
+                        <div class="card" style="text-align: right; background-color: skyblue">
+                            <div class="card-body">
+                                
+                                <p><%- doc.message%></p>
+                            </div>
+                            <div class="card-footer">
+                                <span style="float: left;"><%- doc.deliveredDatetime.toLocaleDateString("en-US") +' ' + doc.deliveredDatetime.getHours() + ':' + doc.deliveredDatetime.getMinutes() + ':' + doc.deliveredDatetime.getSeconds()%> </span>
+                            </div>
+                        </div> 
+                    </div> 
+                </div> 
+                <% }%>
+            <% }) %>
+            </div>
+        </div>
+    </div>
+<% include partials/footer %>
