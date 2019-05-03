@@ -35,6 +35,19 @@ router.get('/createfollower', function(req, res){
     userNodesController.setUsersFollowers(req, res, sourceUser, destUser, handleSuccessResponse, handleErrorResponse); 
 });
 
+router.get('/deletefollower', function(req, res){
+    var sourceUser = req.query.sourceUser;
+    var destUser = req.query.destUser;
+    userNodesController.unfollowList(req, res, sourceUser, destUser, handleSuccessResponse, handleErrorResponse); 
+});
+
+router.get('/participate', function(req, res){
+    var userName = req.query.userName;
+    var organiser = req.query.organiser;
+    var eventId = parseInt(req.query.eventId);
+    userNodesController.UsersParticipation(req, res, userName, organiser,eventId, handleSuccessResponse, handleErrorResponse); 
+});
+
 function handleSuccessResponse(req, res, responseData)
 {
     if(responseData)
