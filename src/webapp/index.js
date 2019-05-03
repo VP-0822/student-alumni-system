@@ -10,7 +10,7 @@ mongoose.connect(database.mongodb);
 
 //Connect Neo4J
 driver = neo4j.driver(database.neo4j, neo4j.auth.basic(database.neo4j_username, database.neo4j_password));
-
+session = driver.session();
 
 const app= express();
 
@@ -27,6 +27,10 @@ app.use('/', homePage);
 //define routes for literature
 let messages = require('./routes/userChat');
 app.use('/userChat', messages);
+
+//define routes for user events
+let events = require('./routes/userNodes');
+app.use('/users', events);
 
 //start server
 app.listen(3000, function(){
