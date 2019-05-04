@@ -76,16 +76,24 @@ exports.getFollowedChannels = function(req, res, username, isOwner, isModerator,
 }
 
 exports.createNewPost = function(req, res, requestData, handleSuccessResponse, handleErrorResponse){
-    var self = this;
     var userName = requestData.userName;
     var channelName = requestData.channelName;
     var nowDate = new Date();
-    var queryDateAsString = nowDate.getFullYear()+"-"+nowDate.getMonth() +1 +"-"+nowDate.getDate();
+    var queryDateAsString = nowDate.getFullYear()+"-"+ (nowDate.getMonth() +1) +"-"+nowDate.getDate();
     var postData = requestData.postData;
     var tags = requestData.tags;
+    var tagsString = [];
+    if(tags && tags.length > 0) {
+        tagsString = "[";
+        requestData.tags.forEach(function (tag) {
+            tagsString += "'"+tag+"',";
+        });
+        tagsString = tagsString.substring(0, tagsString.length-1);
+        tagsString += "]";
+    }
     var view = requestData.view;
 
-    var query = "match (u:user {name:'"+userName+"'}), (c:channel {channel_name:'"+channelName+"'}) create (u) -[:CREATED {date:date('"+queryDateAsString+"')}]-> (p:post {data:'"+postData+"', tags:"+tags+"}) -[:ON {view:'"+view+"'}]-> (c) return u,c,p"
+    var query = "match (u:user {name:'"+userName+"'}), (c:channel {channel_name:'"+channelName+"'}) create (u) -[:CREATED {date:date('"+queryDateAsString+"')}]-> (p:post {data:'"+postData+"', tags:"+tagsString+"}) -[:ON {view:'"+view+"'}]-> (c) return u,c,p"
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {
@@ -96,14 +104,16 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
 
         //populate redis sorted set for tags for this new post
         var client = redis.createClient(database.redis_port, database.redis_host);
-        self.tags.forEach(function (tag) {
+        tags.forEach(function (tag) {
             var args = [];
             var tagnamekey = tag.toLowerCase();
             tagnamekey = tagnamekey.replace(/ /g, '_');
-            args.push(self.channelName + ':' + tagnamekey);
+            var channelNameKey = channelName.toLowerCase();
+            channelNameKey = channelNameKey.replace(/ /g, '_');
+            args.push(channelNameKey + ':' + tagnamekey);
             args.push(1);
-            args.push(self.userName);
-            client.zadd(args, function(error, response){
+            args.push(userName);
+            client.zincrby(args, function(error, response){
                 if(error) {
                     throw error;
                 }
@@ -112,16 +122,19 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
 
         //prepare notification list
         var notificationUserList = [];
-        self.tags.forEach(function (tag) {
+        //TODO: Handle async events
+        tags.forEach(function (tag) {
             var args = [];
             var tagnamekey = tag.toLowerCase();
             tagnamekey = tagnamekey.replace(/ /g, '_');
-            args.push(self.channelName + ':' + tagnamekey);
+            var channelNameKey = channelName.toLowerCase();
+            channelNameKey = channelNameKey.replace(/ /g, '_');
+            args.push(channelNameKey + ':' + tagnamekey);
             args.push(0);
             args.push(10);
-            client.zrevrangebyscore(args, function (err, response) {
+            client.zrevrange(args, function (err, response) {
                 if (err) throw err;
-                notificationUserList = response;
+                notificationUserList = notificationUserList.concat(response);
             });
         });
         handleSuccessResponse(req, res, {data: returnResults, notificationList: notificationUserList});
