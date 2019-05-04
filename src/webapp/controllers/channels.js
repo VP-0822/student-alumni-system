@@ -1,4 +1,6 @@
 const neo4j = require('neo4j-driver').v1;
+var redis = require('redis');
+const database = require('./config/database');
 
 exports.createChannel = function(req, res, requestData, handleSuccessResponse, handleErrorResponse){
     var userName = requestData.userName;
@@ -74,6 +76,7 @@ exports.getFollowedChannels = function(req, res, username, isOwner, isModerator,
 }
 
 exports.createNewPost = function(req, res, requestData, handleSuccessResponse, handleErrorResponse){
+    var self = this;
     var userName = requestData.userName;
     var channelName = requestData.channelName;
     var nowDate = new Date();
@@ -90,7 +93,38 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
             returnResults.push(element._fields[1].properties);
             returnResults.push(element._fields[2].properties);
         });
-        handleSuccessResponse(req, res, returnResults);
+
+        //populate redis sorted set for tags for this new post
+        var client = redis.createClient(database.redis_port, database.redis_host);
+        self.tags.forEach(function (tag) {
+            var args = [];
+            var tagnamekey = tag.toLowerCase();
+            tagnamekey = tagnamekey.replace(/ /g, '_');
+            args.push(self.channelName + ':' + tagnamekey);
+            args.push(1);
+            args.push(self.userName);
+            client.zadd(args, function(error, response){
+                if(error) {
+                    throw error;
+                }
+            });
+        });
+
+        //prepare notification list
+        var notificationUserList = [];
+        self.tags.forEach(function (tag) {
+            var args = [];
+            var tagnamekey = tag.toLowerCase();
+            tagnamekey = tagnamekey.replace(/ /g, '_');
+            args.push(self.channelName + ':' + tagnamekey);
+            args.push(0);
+            args.push(10);
+            client.zrevrangebyscore(args, function (err, response) {
+                if (err) throw err;
+                notificationUserList = response;
+            });
+        });
+        handleSuccessResponse(req, res, {data: returnResults, notificationList: notificationUserList});
     }).catch(function(err){
         handleErrorResponse(req, res, err);
     });
