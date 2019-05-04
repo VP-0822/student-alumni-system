@@ -1,6 +1,6 @@
 const neo4j = require('neo4j-driver').v1;
 var redis = require('redis');
-const database = require('./config/database');
+const database = require('./../config/database');
 
 exports.createChannel = function(req, res, requestData, handleSuccessResponse, handleErrorResponse){
     var userName = requestData.userName;
