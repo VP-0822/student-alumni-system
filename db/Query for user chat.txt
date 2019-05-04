@@ -1,0 +1,1 @@
+userMessages.find({$and: [{"sender_user_name" : {$in: [sender, receiver]}}, {"recipient_user_name" : {$in: [sender, receiver]}}]}).sort({"sendDatetime": 1})
