@@ -2,7 +2,7 @@ Queries for user stories 3 and 6
 
 Use Story: 3
 
-1. User : user_name
+1. User : user_name, full_name
 	
 1.	CREATE(u:user:student{user_name:"sanket",full_name:"Sanket Warambhe"})
 2.	CREATE (u:user:student{user_name:" viraj ",full_name:"Viraj Patel"})

@@ -1,0 +1,103 @@
+create (u:user:student {user_name:'akansha',full_name:'Akansha Pandey'})
+create (u:user:student {user_name:'viraj',full_name:'Viraj Patel'})
+create (u:user:alumni {user_name:'ashish',full_name:'Ashish C'})
+
+Create channels:
+-------------------------------
+create (c:channel {channel_name:'Machine Learning', category: 'Technology', tags: ['Computer Science', 'Machine Learning','Big Data'], creation_date: date('2019-02-01')})
+create (c:channel {channel_name:'ACS Oct 2018', category: 'Group', tags: ['ACS', 'October','2018', 'Student Group'], creation_date: date('2018-09-01')})
+create (c:channel {channel_name:'Mainframe', category: 'Technology', tags: ['Computer Science', 'Mainframe','Banking'], creation_date: date('2019-01-01')})
+
+Create User Relationships:
+-------------------------------
+match (u:user {user_name:'akansha'})
+match (c:channel {channel_name:'ACS Oct 2018'})
+create (u) -[:FOLLOWS {since:date('2018-10-02'), is_owner:false, is_moderator: true}] -> (c)
+return u,c
+
+match (u:user {user_name:'viraj'})
+match (c:channel {channel_name:'ACS Oct 2018'})
+create (u) -[:FOLLOWS {since:date('2018-10-10'), is_owner:false, is_moderator: false}] -> (c)
+return u,c
+
+match (u:user {user_name:'viraj'})
+match (c:channel {channel_name:'Machine Learning'})
+create (u) -[:FOLLOWS {since:date('2019-02-01'), is_owner: true, is_moderator: true}] -> (c)
+return u,c
+
+match (u:user {user_name:'akansha'})
+match (c:channel {channel_name:'Mainframe'})
+create (u) -[:FOLLOWS {since:date('2019-01-01'), is_owner: true, is_moderator: true}] -> (c)
+return u,c
+
+match (u:user {user_name:'akansha'})
+match (c:channel {channel_name:'Machine Learning'})
+create (u) -[:FOLLOWS {since:date('2019-02-04'), is_owner: false, is_moderator: true}] -> (c)
+return u,c
+
+match (u:user {user_name:'ashish'})
+match (c:channel {channel_name:'Machine Learning'})
+create (u) -[:FOLLOWS {since:date('2019-02-06'), is_owner: false, is_moderator: false}] -> (c)
+return u,c
+
+Create User posts
+---------------------------------
+match (u:user {user_name:'ashish'}) -[:FOLLOWS]-> (c:channel {channel_name:'Machine Learning'})
+create (u) -[:CREATED {date:date('2019-02-08')}]-> (p:post {data:'Hello I found interesting dataset for image recognition...', tags:['image recognition', 'python', 'opencv']}) -[:ON {view:'public'}]-> (c)
+return u,c,p
+
+match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_name:'Machine Learning'})
+create (u) -[:CREATED {date:date('2019-02-09')}]-> (p:post {data:'Hello All, Let us all meet to discuss on interesting findings on regression algorithm', tags:['machine learning', 'python', 'regression']}) -[:ON {view:'private'}]-> (c)
+return u,c,p
+
+match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_name:'ACS Oct 2018'})
+create (u) -[:CREATED {date:date('2019-01-03')}]-> (p:post {data:'Hello All, BBQ Party is on this Friday. Do join. :)', tags:['party', 'celebration']}) -[:ON {view:'private'}]-> (c)
+return u,c,p
+
+match (u:user {user_name:'akansha'}) -[:FOLLOWS]-> (c:channel {channel_name:'ACS Oct 2018'})
+create (u) -[:CREATED {date:date('2019-10-15')}]-> (p:post {data:'Hello All, Meet up for all ACS students to discuss about course.', tags:['ACS', 'course']}) -[:ON {view:'public'}]-> (c)
+return u,c,p
+
+SELECT QUERIES:
+==============================
+
+All channels created by user:
+----------------------------
+match (u:user) -[:FOLLOWS {is_owner:true}] -> (c:channel)
+return u.user_name AS `Name`, c.channel_name AS `Channel Name`, c.creation_date AS `Date of Creation`
+
+match (u:user {user_name:'viraj'}) -[:FOLLOWS {is_owner:true}] -> (c:channel)
+return u.user_name AS `Name`, c.channel_name AS `Channel Name`, c.creation_date AS `Date of Creation`
+
+All channels moderated by user:
+------------------------------
+match (u:user) -[:FOLLOWS {is_moderator:true}] -> (c:channel)
+return u.user_name AS `Name`, c.channel_name AS `Channel Name`, c.creation_date AS `Date of Creation`
+
+match (u:user {user_name:'viraj'}) -[:FOLLOWS {is_moderator:true}] -> (c:channel)
+return u.user_name AS `Name`, c.channel_name AS `Channel Name`, c.creation_date AS `Date of Creation`
+
+All channels followed by user:
+------------------------------
+match (u:user {user_name:'viraj'}) -[f:FOLLOWS ] -> (c:channel)
+return u.user_name AS `Name`, c.channel_name AS `Channel Name`, f.since AS `Followed Since`
+
+All posts on particular channel:
+-------------------------------
+match (c:channel {channel_name:'Machine Learning'}) <-[o:ON]- (p:post) <-[t:CREATED] - (u:user)
+return u.user_name AS `User Name`, p.data AS `Post`,t.date AS `Post date`, o.view AS `Post Type`
+
+All public posts on particular channel:
+---------------------------------------
+match (c:channel {channel_name:'Machine Learning'}) <-[:ON {view:'public'}]- (p:post) <-[t:CREATED] - (u:user)
+return u.user_name AS `User Name`, p.data AS `Post`,t.date AS `Post date`
+
+All private posts on particular channel:
+---------------------------------------
+match (c:channel {channel_name:'Machine Learning'}) <-[:ON {view:'private'}]- (p:post) <-[t:CREATED] - (u:user)
+return u.user_name AS `User Name`, p.data AS `Post`,t.date AS `Post date`
+
+All posts made by user on different channels:
+---------------------------------------------
+match (c:channel) <-[o:ON]- (p:post) <-[t:CREATED] - (u:user {name:'viraj'})
+return c.channel_name AS `Channel Name`, p.data AS `Post`,t.date AS `Post date`, o.view AS `Post Type`

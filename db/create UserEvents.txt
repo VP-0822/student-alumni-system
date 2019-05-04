@@ -1,0 +1,64 @@
+**CREATE EVENTS**
+create (e:event {event_id:'1',event_name:'hackathon',category:'competition',loaction:'SRH University Arc 001', event_date:date('2019-04-01')})
+create (e:event {event_id:'2',event_name:'design thinking',category:'lecture',loaction:'SRH University T025', event_date:date('2019-04-15')})
+
+**CREATE RELATIONSHIPS**
+match (u:user {user_name:'akansha'})
+match (e:event {event_id:'1'})
+create (u) -[:PARTICIPATED_IN {date:date('2019-03-01'),is_organiser:true}] -> (e)
+
+match (u:user {user_name:'viraj'})
+match (e:event {event_id:'1'})
+create (u) -[:PARTICIPATED_IN {date:date('2019-03-04'),is_organiser:false}] -> (e)
+
+match (u:user {user_name:'ashish'})
+match (e:event {event_id:'2'})
+create (u) -[:PARTICIPATED_IN {date:date('2019-03-07'),is_organiser:true}] -> (e)
+
+match (u:user {user_name:'akansha'})
+match (e:event {event_id:'2'})
+create (u) -[:PARTICIPATED_IN {date:date('2019-03-10'),is_organiser:false}] -> (e)
+
+match (u:user {user_name:'viraj'})
+match (e:event {event_id:'2'})
+create (u) -[:PARTICIPATED_IN {date:date('2019-03-11'),is_organiser:false}] -> (e)
+
+**SELECT QUERY**
+###### Get all events user has paricipated in or hosted it
+match (d:user {user_name:'akansha'}) - [p:PARTICIPATED_IN] ->(e:event)
+return d.user_name AS `User Name`, e.event_id As `Event Id`, e.event_name As `Event Name`, p.is_organiser As `Participation Type`
+
+###### Return events I have participated/hosted which are happening in month of april
+match (u:user {user_name:'akansha'}) -[p:PARTICIPATED_IN]-> (e:event)
+where e.event_date.MONTH = 4
+return e
+
+###### Return lectures I have participated which are happening in month of april
+match (u:user {user_name:'akansha'}) -[p:PARTICIPATED_IN]-> (e:event {category:'lecture'})
+where e.event_date.MONTH = 4
+return e
+
+###### Return all the events which I have organized in month of april
+match (u:user {user_name:'akansha'}) -[p:PARTICIPATED_IN {is_organiser:true}]-> (e:event)
+where e.event_date.MONTH = 4
+return u,e
+
+**UPDATE QUERY**
+###### Change event date
+
+match (e:event)
+where e.event_id = '2'
+set e.event_date = date('2019-04-17')
+return e
+
+###### User wants to see suggestion for events he/she would like to attend based on previous events attended by user 
+and new event attendees from his following list with same interest.
+
+
+ZINCRBY eventtags:akansha 1 "Machine Learning"
+ZINCRBY eventtags:akansha 1 "Algorithm"
+ZINCRBY eventtags:akansha 1 "Project Management"
+ZINCRBY eventtags:akansha 1 "Machine Learning"
+
+ZREVRANGE eventtags:akansha 0 -1
+

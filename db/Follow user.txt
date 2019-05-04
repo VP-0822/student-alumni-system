@@ -1,0 +1,27 @@
+CREATE QUERIES
+Create following relationshipmatch (a:user {user_name:'akansha'}) 
+match (v:user {user_name:'viraj'})
+create (a)-[f:FOLLOWING {since:date('2019-01-01')}]-> (v)-[f2:FOLLOWING {since:date('2019-01-02')}] -> (a)
+return a,v
+
+match (a:user {user_name:'ashish'}) 
+match (v:user {user_name:'viraj'})
+create (a)-[f:FOLLOWING {since:date('2019-01-09')}]-> (v)
+return a,v
+
+match (a:user {user_name:'akansha'}) 
+match (a2:user {user_name:'ashish'})
+create (a2)-[f:FOLLOWING {since:date('2019-01-07')}]-> (a)
+return a,a2
+
+match (a:user {user_name:'akansha'}) 
+match (a2:user {user_name:'ashish'})
+create (a)-[f:FOLLOWING {since:date('2019-02-11')}]-> (a2)
+return a,a2
+
+SELECT QUERY
+Get all user's following lists
+match (a:user {user_name:'akansha'}) - [f:FOLLOWING] -> (u:user) return a.user_name, u.user_name
+
+Get user's followers lists
+match (a:user {user_name:'akansha'}) - [f:FOLLOWING] -> (u:user) return a.user_name, u.user_name
