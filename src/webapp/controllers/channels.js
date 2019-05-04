@@ -93,7 +93,7 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
     }
     var view = requestData.view;
 
-    var query = "match (u:user {name:'"+userName+"'}), (c:channel {channel_name:'"+channelName+"'}) create (u) -[:CREATED {date:date('"+queryDateAsString+"')}]-> (p:post {data:'"+postData+"', tags:"+tagsString+"}) -[:ON {view:'"+view+"'}]-> (c) return u,c,p"
+    var query = "match (u:user {user_name:'"+userName+"'}), (c:channel {channel_name:'"+channelName+"'}) create (u) -[:CREATED {date:date('"+queryDateAsString+"')}]-> (p:post {data:'"+postData+"', tags:"+tagsString+"}) -[:ON {view:'"+view+"'}]-> (c) return u,c,p"
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {
@@ -149,7 +149,7 @@ exports.getPosts = function(req, res, channelName, view, handleSuccessResponse, 
     if(view && (view === 'public' || view === 'private')) {
         query += "{view ='"+view+"'}";
     }
-    query += "]- (p:post) <-[t:CREATED] - (u:user) return u.name AS `User Name`, p.data AS `Post`, t.date.day+'/'+t.date.month+'/'+t.date.year AS `Post date`";
+    query += "]- (p:post) <-[t:CREATED] - (u:user) return u.user_name AS `User Name`, p.data AS `Post`, t.date.day+'/'+t.date.month+'/'+t.date.year AS `Post date`";
     session.run(query).then(function(result){
         var returnResults = [];
         var tableHeaderKeys;
