@@ -1,0 +1,9 @@
+{
+	"user_name":"vaibhav",
+	"file_title":"degree",
+	"file_url": "www.google.com",
+	"file_category":"document",
+	"created_at": new Date(),
+	"tags": ["imp", "ml"],
+	"version":1
+}
