@@ -1,0 +1,65 @@
+{  
+   "user_name":"vaibhav",
+   "email":"think.vaibhavsingh@gmail.com",
+   "password":"123",
+   "first_name":"vaibhav",
+   "last_name":"singh",
+   "address":[  
+      "ringstarsse41",
+      "wiesenbach"
+   ],
+   "dob":"19/12/1993",
+   "gender":"male",
+   "photo":"path",
+   "education_background":[  
+      {  
+         "degree_name":"Msc",
+         "start_date":new Date("2018-12-11"),
+         "end_date":new Date("2020-12-11"),
+         "university_name":"SRH",
+         "grade":"2",
+         "projects":[  
+            {  
+               "name":"ACS",
+               "description":"acs",
+               "tags":[  
+                  "c++",
+                  "c"
+               ],
+               "members":{  
+                  "name":[  
+                     "vaibhav",
+                     "sarang"
+                  ],
+                  "date":"2/2/2019",
+                  "references":[  
+                     "qwe",
+                     "rty"
+                  ]
+               }
+            }
+         ]
+      }
+   ],
+   "research_work":[  
+      {  
+         "name":"machine learning",
+         "description":"xyz",
+         "tags":[  
+            "data science",
+            "Hidden markov model"
+         ],
+         "members":{  
+            "name":[  
+               "vaibhav",
+               "singh"
+            ],
+            "date":new Date("2019-12-11"),
+            "references":[  
+               "abc",
+               "abcdf"
+            ]
+         }
+      }
+   ]
+}
