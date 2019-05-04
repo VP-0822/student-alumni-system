@@ -1,1 +1,1 @@
-# student-alumini-system
+# student-alumni-system
