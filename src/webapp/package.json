@@ -1,7 +1,7 @@
 {
   "name": "student-alumini-system",
   "version": "1.0.0",
-  "description": "Student and alumini system for university.",
+  "description": "Student and alumni system for university.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VP-0822/student-alumini-system.git"
+    "url": "git+https://github.com/VP-0822/student-alumni-system.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/VP-0822/student-alumini-system/issues"
+    "url": "https://github.com/VP-0822/student-alumni-system/issues"
   },
-  "homepage": "https://github.com/VP-0822/student-alumini-system#readme",
+  "homepage": "https://github.com/VP-0822/student-alumni-system#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "ejs": "^2.6.1",
