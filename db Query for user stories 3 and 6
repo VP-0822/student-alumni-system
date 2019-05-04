@@ -1,0 +1,196 @@
+Queries for user stories 3 and 6
+
+Use Story: 3
+
+1. User : user_name
+	
+1.	CREATE(u:user:student{user_name:"sanket",full_name:"Sanket Warambhe"})
+2.	CREATE (u:user:student{user_name:" viraj ",full_name:"Viraj Patel"})
+3.	CREATE (u:user:student{user_name:" vaibhav ",full_name:"Vaibhav Singh"}
+4.	CREATE (u:user:student{user_name:" sarang ",full_name:"Sarang Samarth"})
+5.	CREATE (u:user:student{user_name:" rahul ",full_name:"Rahul Sonawane"})
+6.	CREATE (u:user:student{user_name:" akshay ",full_name:"Akshay Gavandi"})
+
+2.  Skill : skill_name
+
+1. CREATE (s:skill{skill_name:"JAVA"})
+2. CREATE (s:skill{skill_name:"C++"})
+3. CREATE (s:skill{skill_name:"MySQL"})
+4. CREATE (s:skill{skill_name:"C#"})
+5. CREATE (s:skill{skill_name:"C"})
+6. CREATE (s:skill{skill_name:"Neo4j"})
+7. CREATE (s:skill{skill_name:"HTML/CSS"})
+8. CREATE (s:skill{skill_name:"MongoDB"}) 
+9. CREATE (s:skill{skill_name:"Python"})
+
+3. Creating relationship between user and skill
+
+1.  MATCH (u : user{user_name : "rahul"}), (s : skill{skill_name : "JAVA"})  
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+2.	MATCH (u : user{user_name : "rahul"}), (s : skill{skill_name : "MySQL"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+3.	MATCH (u : user{user_name : "rahul"}), (s : skill{skill_name : "HTML/CSS"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+4.	MATCH (u : user{user_name : "viraj"}), (s : skill{skill_name : "HTML/CSS"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+5.	MATCH (u : user{user_name : "viraj"}), (s : skill{skill_name : "C#"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+6.	MATCH (u : user{user_name : "viraj"}), (s : skill{skill_name : "MongoDB"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+7.	MATCH (u : user{user_name : "sanket"}), (s : skill{skill_name : "MongoDB"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+8.	MATCH (u : user{user_name : "sanket"}), (s : skill{skill_name : "JAVA"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+9.	MATCH (u : user{user_name : "sarang"}), (s : skill{skill_name : "Python"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+10.	MATCH (u : user{user_name : "sarang"}), (s : skill{skill_name : "Neo4j"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+11.	MATCH (u : user{user_name : "vaibhav"}), (s : skill{skill_name : "C"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+12.	MATCH (u : user{user_name : "vaibhav"}), (s : skill{skill_name : "C++"}) 
+    CREATE (u) - [r : SKILLED_IN] -> (s)
+
+
+4.  Creating relationship between one user and another user for Recommendation comment
+
+1.	MATCH (u : user{user_name : "vaibhav"}), (v : user{user_name : "viraj"}) 
+    CREATE (u) - [r : RECOMMENDATION_COMMENT{comment:"You are very good in C#", date: date("2019-03-29")}] -> (v)
+2.	MATCH (u : user{user_name : "rahul"}), (v : user{user_name : "sarang"}) 
+    CREATE (u) - [r : RECOMMENDATION_COMMENT {comment:"I like your working style. You are good programmer",  date: date("2019-04-02")}] -> (v)
+3.	MATCH (u : user{user_name : "sanket"}), (v : user{user_name : "viraj"}) 
+    CREATE (u) - [r : RECOMMENDATION_COMMENT {comment:"You not only granted me an opportunity to work with you, but you also guided me and made me strengthen my focus on all that I ever wanted to achieve.", date: date("2019-03-26")}] -> (v)
+4.	MATCH (u : user{user_name : "rahul"}), (v : user{user_name : "sanket"}) 
+    CREATE (u) - [r : RECOMMENDATION_COMMENT {comment:" You are good programmer", date: date("2019-05-02") }] -> (v)
+
+
+User Story: 6
+
+1.	Group : group_name, group_start_date
+
+1.	CREATE (g:group{group_name:"ACS-Winter2018_Group_1",group_start_date:  date("2019-10-01") })
+2.	CREATE (g:group{group_name:"ACS-Winter2018_Group_2",group_start_date: date("2019-10-01") })
+3.	CREATE (g:group{group_name:"ACS-Summer2019_Group_1",group_start_date: date("2019-04-01") })
+
+2. Module: module_name, start_date, appointments : [], lecturers:[]
+
+1.	CREATE (m:module{module_name:"IPM", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") ,appointments:["Mon-Thu: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]})
+2.	CREATE (m:module{module_name:"SAD", start_date: date("2018-11-01")  ,end_date: date("2018-11-30"),appointments:["Mon-Wed: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Christoph Hahn"]})
+3.	CREATE (m:module{module_name:"SDP", start_date: date("2018-11-01")  ,end_date: date("2019-11-30"),appointments:["Mon-Wed: 2pm to 5pm"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]})
+4.	CREATE (m:module{module_name:"SAP Technology", start_date: date("2018-12-01")  ,end_date: date("2018-12-31"),appointments:["Mon-Wed: 2pm to 5pm" ,"Fri: 9am to 5pm"], lecturers:["Prof.Joachim Brauch"]})
+5.	CREATE (m:module{module_name:"ACS", start_date: date("2018-12-01") ,end_date: date("2018-12-31"),appointments:["Mon: 2pm to 5pm" ,"Wed: 2pm to 5pm", "Fri: 9am to 5pm"], lecturers:["Prof.Dr.Mohammed Yass"]})
+6.	CREATE (m:module{module_name:"IPM", start_date: date("2019-04-01")  ,end_date: date("2019-04-30") ,appointments:["Mon-Thu: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]})
+7.	CREATE (m:module{module_name:"SDP", start_date:date("2019-05-01") ,end_date:date("2019-05-31"),appointments:["Mon-Wed: 2pm to 5pm"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]})
+
+
+3.Creating relation between user and group
+
+1.	MATCH (u : user{user_name : "rahul"}), (g : group{group_name : "ACS-Winter2018_Group_1"}) 
+    CREATE (u) - [r : BELONGS_TO] -> (g)
+2.	MATCH (u : user{user_name : "viraj"}), (g : group{group_name : "ACS-Winter2018_Group_1"})
+    CREATE (u) - [r : BELONGS_TO] -> (g)
+3.	MATCH (u : user{user_name : "sanket"}), (g : group{group_name : "ACS-Winter2018_Group_1"}) 
+    CREATE (u) - [r : BELONGS_TO] -> (g)
+4.	MATCH (u : user{user_name : "vaibhav"}), (g : group{group_name : "ACS-Winter2018_Group_2"}) 
+    CREATE (u) - [r : BELONGS_TO] -> (g)
+5.	MATCH (u : user{user_name : "sarang"}), (g : group{group_name : "ACS-Winter2018_Group_2"}) 
+    CREATE (u) - [r : BELONGS_TO] -> (g)
+
+4.Creating relationship between user and Module
+
+1.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"IPM"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+2.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"IPM"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+3.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"IPM"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+4.	MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"IPM"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+5.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"IPM"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+6.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"SAD"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+7.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"SAD"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+8.	MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"SAD"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+9.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"SDP"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+10.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"SDP"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+11.	MATCH (u : user{user_name : "akshay"}), (m : module{module_name :"IPM",start_date :date( 2019-04-01'}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+12.	MATCH (u : user{user_name : "akshay"}), (m : module{module_name :"SDP",start_date :date("2019-05-01")}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+13.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"ACS"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+14.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"ACS"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+15.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"SAP Technology"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+16.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"SAP Technology"}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+15. MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"SAP Technology"})
+    CREATE (u) - [r : ENROLLED_TO] -> (m)
+
+Search Queries
+
+1.	Return all users in the database
+    MATCH (u:user) RETURN u.user_name
+2.	Return all the skill for particular user 
+    MATCH (user{user_name:"rahul"}) -- (skill) RETURN skill.skill_name
+3.	Returns any nodes connected with the user by an outgoing relationship.
+    MATCH (:user{user_name:"viraj"}) --> (skill) RETURN skill.skill_name
+4.	Returns the type of each outgoing relationship 
+    MATCH (:user{user_name:"viraj"})-[r]->(skill) RETURN type (r)
+5.	Return user list who has skilled in same skill
+    1.	MATCH (skill{skill_name:"JAVA"})--(user) return user.user_name
+
+    2.	MATCH (w:skill {skill_name: 'JAVA' })<-[:SKILLED_IN]-(user) RETURN user.user_name
+
+6.	Return user list who has same skilled in particular skill
+    MATCH (a:user)-[:SKILLED_IN]->(b:skill) where b.skill_name = "JAVA" or  b.skill_name = "HTML/CSS" RETURN a.user_name as User,b.skill_name as Skill
+
+7.	Return different user list with different skill
+    MATCH (a:user)-[:SKILLED_IN]->(b:skill)  RETURN a.user_name as User,b.skill_name as Skill
+
+8.	Who gave comment to Whom on which date 
+	  MATCH (n:user) - [r:RECOMMENDATION_COMMENT] -> (m:user) RETURN 	n.user_name as Recommender,m.user_name as Recommendant,r.comment as 	Comment ,r.date as Date
+
+9.  List all the users with skill collection 
+	  MATCH (a)-[:SKILLED_IN]->(b)
+	  RETURN a.user_name as User, COLLECT(b.skill_name) as Skills
+	  ORDER BY SIZE(Skills) DESC LIMIT 10
+    
+10.	Which user get highest number of recommendation comment from other 	users 
+	  MATCH ()-[r: RECOMMENDATION_COMMENT]->(n:user)
+	  WITH n, count(r) as rel_cnt
+	  WHERE rel_cnt > 0
+	  RETURN n.user_name as User, rel_cnt as NumberOfComment
+	  Order by rel_cnt DESC
+
+11.	Return user and his Group details
+    MATCH (a:user)-[:BELONGS_TO](b:group)  RETURN a.user_name as User,b.group_name as Group
+
+12.	Return Group details and how many number of student in that group
+    MATCH ()-[r: BELONGS_TO]->(n:group)
+    WITH n, count(r) as rel_cnt
+    WHERE rel_cnt > 0
+    RETURN n.group_name as Group, n.group_start_date as StartDate, rel_cnt as NumberOfStudent Order by rel_cnt DESC
+
+13.	Return group , user module – start date and end date 
+	  MATCH(g:group)<-[r:BELONGS_TO]-(u:user)-[e:ENROLLED_TO]->(m:module)
+	  RETURN g.group_name as Group, u.user_name as User, m.module_name as Module ,m.start_date as StartDate, m.end_date as EndDate
+
+14.	User list with enrolled module 
+	  MATCH(n:module{module_name:"IPM"})<-[:ENROLLED_TO]-(m) RETURN 	n.module_name as Module,n.start_date as StartDate, m.user_name
+
+15.	Users list in Descending order
+    MATCH (n:user)
+    WITH n
+    ORDER BY n.user_name desc LIMIT 5
+    RETURN collect(n.user_name)
+
+
+
+ 
+
