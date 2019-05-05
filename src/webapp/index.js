@@ -10,7 +10,7 @@ var redis = require('redis');
 mongoose.connect(database.mongodb);
 
 //Connect redis
-var client = redis.createClient(database.redis_port, database.redis_host);
+//var client = redis.createClient(database.redis_port, database.redis_host);
 
 
 //Connect Neo4J
@@ -48,6 +48,12 @@ app.use('/report', progressReport);
 let userDomain = require('./routes/userDomain');
 app.use('/domain', userDomain);
 
+
+let userFieldSearch = require('./routes/userFieldSearch');
+app.use('/search',userFieldSearch );
+
+let userDocument = require('./routes/document');
+app.use('/document', userDocument);
 
 //start server
 app.listen(3000, function(){

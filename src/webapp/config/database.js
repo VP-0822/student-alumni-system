@@ -1,5 +1,5 @@
 module.exports = {
-    mongodb:'mongodb://localhost/studentAluminiProfileDB',
+    mongodb:'mongodb://localhost/studentprofile',
     neo4j: 'bolt://localhost',
     neo4j_username: 'neo4j',
     neo4j_password: 'Srh@2019',
