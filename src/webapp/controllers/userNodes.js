@@ -144,7 +144,7 @@ exports.getEventComments = function (req, res, eventID, handleSuccessResponse, h
 }
 
 exports.getAllRecommendation= function(req, res, handleSuccessResponse, handleErrorResponse){
-    var query = "MATCH (n:user) - [r:RECOMMENDATION_COMMENT] -> (m:user) RETURN n.full_name as Recommender,m.full_name as Recommendant,r.comment as Comment , r.date.day+'/'+r.date.month+'/'+r.date.year as Date";
+    var query = "MATCH (n:user) - [r:RECOMMENDATION_COMMENT] -> (m:user) RETURN n.full_name as Recommender,m.full_name as Recommendee,r.comment as Comment , r.date.day+'/'+r.date.month+'/'+r.date.year as Date";
    
     session.run(query).then(result=> {
         var tableHeaderKeys;
@@ -161,6 +161,23 @@ exports.getAllRecommendation= function(req, res, handleSuccessResponse, handleEr
     });
 }
 
+exports.getSameSkill= function (req, res, skillName, handleSuccessResponse, handleErrorResponse){
+    var query = "MATCH (a:user)-[:SKILLED_IN]->(b:skill) where b.skill_name = '"+skillName+"' RETURN a.full_name as User,b.skill_name as Skill";
+
+    session.run(query).then(result=> {
+        var tableHeaderKeys;
+        result.records.forEach(element => {
+            tableHeaderKeys = element.keys;
+        });
+        var returnResults = [];
+        result.records.forEach(element => {
+            returnResults.push(element._fields);
+        });
+        handleSuccessResponse(req, res, {tableHeader: tableHeaderKeys, tableItems: returnResults});
+    }).catch(function(err){
+        handleErrorResponse(req, res, err);
+    });
+}
 exports.getCurrentModules= function(req, res, userName, handleSuccessResponse, handleErrorResponse){
     var query = "match (u:user {user_name:'"+userName+"'})-[e:ENROLLED_TO]->(m:module) where m.start_date <=  date() and m.end_date >= date() return u.full_name as Student, m.module_name as Module, m.appointments as Time";
 

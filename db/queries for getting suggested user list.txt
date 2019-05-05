@@ -1,0 +1,20 @@
+ADDING DATA TO VIEW HISTORY:
+
+ZINCRBY sanket 1 "User 1"
+ZINCRBY sanket 1 "User 2"
+ZINCRBY sanket 1 "User 3"
+
+ZINCRBY sarang 1 "User 1"
+ZINCRBY sarang 1 "User 2"
+ZINCRBY sarang 1 "User 3"
+
+
+GETTING VIEWER HISTORY RESULT
+
+ZREVRANGE sanket 0 -1
+ZREVRANGE sarang 0 -1
+
+
+//Final conditions for getting the users from same group and the users who have attented similar events
+match (u:user {name: 'Sanket'}) -[r:BELONGS_TO]-> (g:group) <-[p:BELONGS_TO]- (v:user) -[a:PARTICIPATED_IN]-> (e:event) <-[x:PARTICIPATED_IN]- (u:user {name: 'Sanket'})
+return v
