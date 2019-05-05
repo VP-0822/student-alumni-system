@@ -66,7 +66,15 @@ router.get('/usertypecomment', (req, res) => {
 router.post('/addcomment', (req, res) => {
     var requestData = req.body;
     userNodesController.addComment(req, res, requestData, handleSuccessResponse, handleErrorResponse);
-})
+});
+router.get('/getallrecommendation', (req, res) => {
+    userNodesController.getAllRecommendation(req, res, handleSuccessResponse, handleErrorResponse);
+});
+
+router.get('/getcurrentevent', (req, res) => {
+    var userName = req.query.userName;
+    userNodesController.getCurrentEvent(req, res, userName, handleSuccessResponse, handleErrorResponse);
+});
 
 function handleSuccessResponse(req, res, responseData)
 {
