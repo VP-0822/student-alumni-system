@@ -9,7 +9,7 @@ exports.getuserDomain = function (req, res, domainName, handleSuccessResponse, h
         {
            $lookup:
               {
-                 from: "UserWorkExperience",
+                 from: "userWorkExperience",
                  localField: "company_name",
                  foreignField: "company_name",
                  as: "userworkexperience"

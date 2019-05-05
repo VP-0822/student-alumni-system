@@ -1,6 +1,6 @@
-db.createCollection("progress_report");
+db.createCollection("progressReport");
 
-db.progress_report.insertMany([
+db.progressReport.insertMany([
   {
     "user_name": "sarang",
     "module": [

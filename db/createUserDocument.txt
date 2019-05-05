@@ -1,3 +1,5 @@
+db.createCollection("userDocument");
+
 db.userDocument.insert({
 	"user_name":"vaibhav",
 	"file_title":"degree",
@@ -6,4 +8,4 @@ db.userDocument.insert({
 	"created_at": new Date(),
 	"tags": ["imp", "ml"],
 	"version":1
-})
+});

@@ -5,7 +5,7 @@ User story 4-:
 
 1.To get all users who have failed in 1 subject-
 
- db.progress_report.find({
+ db.progressReport.find({
       module : {
           $elemMatch: {
              
@@ -20,7 +20,7 @@ User story 4-:
 
 2.To get all the users who have failed in a particular subject-
 
- db.progress_report.find({
+ db.progressReport.find({
       module : {
           $elemMatch: {
              "module_name": "ACS",
@@ -37,7 +37,7 @@ User story 4-:
 
 3.To get top 5 scorers of a particular subject-
 
-Mongo-: db.progress_report.aggregate([
+Mongo-: db.progressReport.aggregate([
 	{$unwind: '$module'},                                    
                  {$unwind: '$module.attempts'},
 	{$sort: {"module.attempts.score": 1}},
@@ -57,7 +57,7 @@ ZRANGE IPM 0 -1
 
 
 4. To get details of a particular user-
-db.progress_report.find({user_name:"sarang"})
+db.progressReport.find({user_name:"sarang"})
 
 
 User story 5-:
@@ -65,7 +65,7 @@ User story 5-:
 
 5.To get list of all companies where users have worked- 
 
- db.UserWorkExperience.aggregate(
+ db.userWorkExperience.aggregate(
    [
      { $group : { _id : "$user_name", company: { $push: "$company_name" } } }
    ]
@@ -74,7 +74,7 @@ User story 5-:
 
 6.To get user work experience of a particular user sorted by start date-
 
-  db.UserWorkExperience.aggregate([
+  db.userWorkExperience.aggregate([
                     {$sort:{"start_date":1}},
                      { $match: {"user_name":"sarang"}}
 ])
@@ -82,14 +82,14 @@ User story 5-:
 
 7.To get no.of users working in a particular company-
 
-    db.UserWorkExperience.aggregate([
+    db.userWorkExperience.aggregate([
                      { $match: {"company_name":"samsung"}}
                       ])
 
 
 8.To get all companies which have a particular domain-
 
-  db.CompanyDetails.aggregate([
+  db.companyDetails.aggregate([
                       {$unwind: '$domains'}, 
                      { $match: {"domains":"software"}}
                       ])
@@ -97,7 +97,7 @@ User story 5-:
 
 9.To get no. of users working in a particular domain-
 
- db.CompanyDetails.aggregate([
+ db.companyDetails.aggregate([
    {
       $unwind: "$domains"
    },
@@ -105,7 +105,7 @@ User story 5-:
    {
       $lookup:
          {
-            from: "UserWorkExperience",
+            from: "userWorkExperience",
             localField: "company_name",
             foreignField: "company_name",
             as: "userworkexperience"
@@ -119,7 +119,7 @@ User story 5-:
 
 10.To update a particular field in user work experience.
 
-db.UserWorkExperience.updateOne( {user_name:"sarang"},
+db.userWorkExperience.updateOne( {user_name:"sarang"},
                                   {
                                      $set: {designation: "senior analyst" , job_description:"data mining"  }
                                                        }

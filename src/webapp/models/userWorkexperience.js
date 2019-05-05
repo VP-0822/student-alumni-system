@@ -28,4 +28,4 @@ const UserWorkExperienceSchema = mongoose.Schema({
     },
 });
 
-const UserWorkExperienceModel = module.exports = mongoose.model('UserWorkExperience', UserWorkExperienceSchema , 'UserWorkExperience');
+const UserWorkExperienceModel = module.exports = mongoose.model('userWorkExperience', UserWorkExperienceSchema , 'userWorkExperience');

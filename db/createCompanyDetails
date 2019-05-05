@@ -1,6 +1,6 @@
-db.createCollection("CompanyDetails");
+db.createCollection("companyDetails");
 
-db.CompanyDetails.insertMany([
+db.companyDetails.insertMany([
   {
     "company_name": "vivo",
     "company_details": "fhvhvbj",

@@ -1,3 +1,4 @@
+db.createCollection("userAccount");
 
 db.userAccount.insert({  
    "user_name":"vaibhav",
@@ -64,7 +65,7 @@ db.userAccount.insert({
       }
    ]
 }
-)
+);
 
 db.userAccount.insert({  
    "user_name":"sanket",
@@ -131,7 +132,7 @@ db.userAccount.insert({
       }
    ]
 }
-)
+);
 
 db.userAccount.insert({  
    "user_name":"sarang",
@@ -198,7 +199,7 @@ db.userAccount.insert({
       }
    ]
 }
-)
+);
 
 db.userAccount.insert({  
    "user_name":"viraj",
@@ -265,4 +266,4 @@ db.userAccount.insert({
       }
    ]
 }
-)
+);

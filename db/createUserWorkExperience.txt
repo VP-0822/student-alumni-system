@@ -1,6 +1,6 @@
-db.createCollection("UserWorkExperience");
+db.createCollection("userWorkExperience");
 
-db.UserWorkExperience.insertMany([
+db.userWorkExperience.insertMany([
   {
     "user_name": "sarang",
     "designation": "analyst",

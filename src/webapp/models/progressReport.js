@@ -31,4 +31,4 @@ const ProgressReportSchema = mongoose.Schema({
     module: [ModuleSchema]
 });
 
-module.exports = mongoose.model('progress_report', ProgressReportSchema, 'progress_report');
+module.exports = mongoose.model('progressReport', ProgressReportSchema, 'progressReport');

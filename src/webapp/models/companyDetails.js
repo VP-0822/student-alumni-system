@@ -25,4 +25,4 @@ const CompanyDetailsSchema = mongoose.Schema({
     
 });
 
-const CompanyDetailsModel = module.exports = mongoose.model('CompanyDetails', CompanyDetailsSchema , 'CompanyDetails');
+const CompanyDetailsModel = module.exports = mongoose.model('companyDetails', CompanyDetailsSchema , 'companyDetails');
