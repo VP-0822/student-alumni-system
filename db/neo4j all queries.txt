@@ -3,10 +3,10 @@ create (u:user:student {user_name:'akansha',full_name:'Akansha Pandey'});
 create (u:user:student {user_name:'viraj',full_name:'Viraj Patel'});
 create (u:user:alumni {user_name:'ashish',full_name:'Ashish C'});
 CREATE(u:user:student{user_name:"sanket",full_name:"Sanket Warambhe"});
-CREATE (u:user:student{user_name:" vaibhav ",full_name:"Vaibhav Singh"};
-CREATE (u:user:student{user_name:" sarang ",full_name:"Sarang Samarth"});
-CREATE (u:user:student{user_name:" rahul ",full_name:"Rahul Sonawane"});
-CREATE (u:user:student{user_name:" akshay ",full_name:"Akshay Gavandi"});
+CREATE (u:user:student{user_name:"vaibhav",full_name:"Vaibhav Singh"});
+CREATE (u:user:student{user_name:"sarang",full_name:"Sarang Samarth"});
+CREATE (u:user:student{user_name:"rahul",full_name:"Rahul Sonawane"});
+CREATE (u:user:student{user_name:"akshay",full_name:"Akshay Gavandi"});
 
 //Create groups
 CREATE (g:group{group_name:"ACS-Winter2018_Group_1",group_start_date:  date("2019-10-01") });
@@ -48,43 +48,35 @@ create (c:channel {channel_name:'Mainframe', category: 'Technology', tags: ['Com
 //Create following relationship
 match(a:user {user_name:'akansha'}) 
 match (v:user {user_name:'viraj'})
-create (a)-[f:FOLLOWING {since:date('2019-01-01')}]-> (v)-[f2:FOLLOWING {since:date('2019-01-02')}] -> (a)
-return a,v;
+create (a)-[f:FOLLOWING {since:date('2019-01-01')}]-> (v)-[f2:FOLLOWING {since:date('2019-01-02')}] -> (a);
 
 match (a:user {user_name:'ashish'}) 
 match (v:user {user_name:'viraj'})
-create (a)-[f:FOLLOWING {since:date('2019-01-09')}]-> (v)
-return a,v;
+create (a)-[f:FOLLOWING {since:date('2019-01-09')}]-> (v);
 
 match (a:user {user_name:'akansha'}) 
 match (a2:user {user_name:'ashish'})
-create (a2)-[f:FOLLOWING {since:date('2019-01-07')}]-> (a)
-return a,a2;
+create (a2)-[f:FOLLOWING {since:date('2019-01-07')}]-> (a);
 
 match (a:user {user_name:'akansha'}) 
 match (a2:user {user_name:'ashish'})
-create (a)-[f:FOLLOWING {since:date('2019-02-11')}]-> (a2)
-return a,a2;
+create (a)-[f:FOLLOWING {since:date('2019-02-11')}]-> (a2);
 
 match (a:user {user_name:'vaibhav'}) 
 match (v:user {user_name:'viraj'})
-create (a)-[f:FOLLOWING {since:date('2019-02-19')}]-> (v)
-return a,v;
+create (a)-[f:FOLLOWING {since:date('2019-02-19')}]-> (v);
 
 match (a:user {user_name:'rahul'}) 
 match (v:user {user_name:'sarang'})
-create (a)-[f:FOLLOWING {since:date('2019-03-04')}]-> (v)
-return a,v;
+create (a)-[f:FOLLOWING {since:date('2019-03-04')}]-> (v);
 
 match (a:user {user_name:'sanket'}) 
 match (v:user {user_name:'viraj'})
-create (a)-[f:FOLLOWING {since:date('2019-01-29')}]-> (v)
-return a,v;
+create (a)-[f:FOLLOWING {since:date('2019-01-29')}]-> (v);
 
 match (a:user {user_name:'rahul'}) 
 match (v:user {user_name:'sanket'})
-create (a)-[f:FOLLOWING {since:date('2019-02-23')}]-> (v)
-return a,v;
+create (a)-[f:FOLLOWING {since:date('2019-02-23')}]-> (v);
 
 //Create relationship for event participation
 match (u:user {user_name:'akansha'})
@@ -131,51 +123,41 @@ create (u)-[:GAVE_FEEDBACK {comment:'Great interaction with the company represen
 //Create relationship for following channels
 match (u:user {user_name:'akansha'})
 match (c:channel {channel_name:'ACS Oct 2018'})
-create (u) -[:FOLLOWS {since:date('2018-10-02'), is_owner:false, is_moderator: true}] -> (c)
-return u,c;
+create (u) -[:FOLLOWS {since:date('2018-10-02'), is_owner:false, is_moderator: true}] -> (c);
 
 match (u:user {user_name:'viraj'})
 match (c:channel {channel_name:'ACS Oct 2018'})
-create (u) -[:FOLLOWS {since:date('2018-10-10'), is_owner:false, is_moderator: false}] -> (c)
-return u,c;
+create (u) -[:FOLLOWS {since:date('2018-10-10'), is_owner:false, is_moderator: false}] -> (c);
 
 match (u:user {user_name:'viraj'})
 match (c:channel {channel_name:'Machine Learning'})
-create (u) -[:FOLLOWS {since:date('2019-02-01'), is_owner: true, is_moderator: true}] -> (c)
-return u,c;
+create (u) -[:FOLLOWS {since:date('2019-02-01'), is_owner: true, is_moderator: true}] -> (c);
 
 match (u:user {user_name:'akansha'})
 match (c:channel {channel_name:'Mainframe'})
-create (u) -[:FOLLOWS {since:date('2019-01-01'), is_owner: true, is_moderator: true}] -> (c)
-return u,c;
+create (u) -[:FOLLOWS {since:date('2019-01-01'), is_owner: true, is_moderator: true}] -> (c);
 
 match (u:user {user_name:'akansha'})
 match (c:channel {channel_name:'Machine Learning'})
-create (u) -[:FOLLOWS {since:date('2019-02-04'), is_owner: false, is_moderator: true}] -> (c)
-return u,c;
+create (u) -[:FOLLOWS {since:date('2019-02-04'), is_owner: false, is_moderator: true}] -> (c);
 
 match (u:user {user_name:'ashish'})
 match (c:channel {channel_name:'Machine Learning'})
-create (u) -[:FOLLOWS {since:date('2019-02-06'), is_owner: false, is_moderator: false}] -> (c)
-return u,c;
+create (u) -[:FOLLOWS {since:date('2019-02-06'), is_owner: false, is_moderator: false}] -> (c);
 
 
 //Create new posts
 match (u:user {user_name:'ashish'}) -[:FOLLOWS]-> (c:channel {channel_name:'Machine Learning'})
-create (u) -[:CREATED {date:date('2019-02-08')}]-> (p:post {data:'Hello I found interesting dataset for image recognition...', tags:['image recognition', 'python', 'opencv']}) -[:ON {view:'public'}]-> (c)
-return u,c,p;
+create (u) -[:CREATED {date:date('2019-02-08')}]-> (p:post {data:'Hello I found interesting dataset for image recognition...', tags:['image recognition', 'python', 'opencv']}) -[:ON {view:'public'}]-> (c);
 
 match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_name:'Machine Learning'})
-create (u) -[:CREATED {date:date('2019-02-09')}]-> (p:post {data:'Hello All, Let us all meet to discuss on interesting findings on regression algorithm', tags:['machine learning', 'python', 'regression']}) -[:ON {view:'private'}]-> (c)
-return u,c,p;
+create (u) -[:CREATED {date:date('2019-02-09')}]-> (p:post {data:'Hello All, Let us all meet to discuss on interesting findings on regression algorithm', tags:['machine learning', 'python', 'regression']}) -[:ON {view:'private'}]-> (c);
 
 match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_name:'ACS Oct 2018'})
-create (u) -[:CREATED {date:date('2019-01-03')}]-> (p:post {data:'Hello All, BBQ Party is on this Friday. Do join. :)', tags:['party', 'celebration']}) -[:ON {view:'private'}]-> (c)
-return u,c,p;
+create (u) -[:CREATED {date:date('2019-01-03')}]-> (p:post {data:'Hello All, BBQ Party is on this Friday. Do join. :)', tags:['party', 'celebration']}) -[:ON {view:'private'}]-> (c);
 
 match (u:user {user_name:'akansha'}) -[:FOLLOWS]-> (c:channel {channel_name:'ACS Oct 2018'})
-create (u) -[:CREATED {date:date('2019-10-15')}]-> (p:post {data:'Hello All, Meet up for all ACS students to discuss about course.', tags:['ACS', 'course']}) -[:ON {view:'public'}]-> (c)
-return u,c,p;
+create (u) -[:CREATED {date:date('2019-10-15')}]-> (p:post {data:'Hello All, Meet up for all ACS students to discuss about course.', tags:['ACS', 'course']}) -[:ON {view:'public'}]-> (c);
 
 
 //Create relationship for skills
@@ -300,7 +282,7 @@ CREATE (u) - [r : ENROLLED_TO] -> (m);
 
 //Create relationship for endoring user skills
 match(a:user{ user_name:’akansha’}) -[:FOLLOWING]->(v:user{ user_name:’viraj’})
-create (a) - [en:ENDORSED {topic: “Java”, rating: 4.5} ] -> (v)
+create (a) - [en:ENDORSED {topic: “Java”, rating: 4.5} ] -> (v);
 
 match(v:user{ user_name:'viraj'}) -[:FOLLOWING]-> (a:user{ user_name:'akansha'})
-create (v) - [en:ENDORSED {topic: 'PhP' , rating: 3.7} ] -> (a)
+create (v) - [en:ENDORSED {topic: 'PhP' , rating: 3.7} ] -> (a);
