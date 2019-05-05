@@ -97,39 +97,39 @@ User Story: 6
 
 4.Creating relationship between user and Module
 
-1.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"IPM"}) 
+1.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"IPM", start_date :date( "2018-10-01")}) 
+CREATE (u) - [r : ENROLLED_TO] -> (m)
+2.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"IPM", start_date :date( "2018-10-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-2.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"IPM"}) 
+3.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"IPM",  start_date :date( "2018-10-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-3.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"IPM"}) 
+4.	MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"IPM",  start_date :date( "2018-10-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-4.	MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"IPM"}) 
+5.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"IPM",  start_date :date( "2018-10-01")}) 
+    CREATE (u) - [r : ENROLLED_TO] -> (m)			
+6.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"SAD", start_date :date( "2018-11-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-5.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"IPM"}) 
+7.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"SAD" start_date :date( "2018-11-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-6.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"SAD"}) 
+8.	MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"SAD" start_date :date( "2018-11-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-7.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"SAD"}) 
-    CREATE (u) - [r : ENROLLED_TO] -> (m)
-8.	MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"SAD"}) 
-    CREATE (u) - [r : ENROLLED_TO] -> (m)
-9.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"SDP"}) 
-    CREATE (u) - [r : ENROLLED_TO] -> (m)
-10.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"SDP"}) 
-    CREATE (u) - [r : ENROLLED_TO] -> (m)
-11.	MATCH (u : user{user_name : "akshay"}), (m : module{module_name :"IPM",start_date :date( 2019-04-01'}) 
+9.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"SDP", start_date :date( "2018-11-01")}) 
+CREATE (u) - [r : ENROLLED_TO] -> (m)
+10.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"SDP", start_date :date( "2018-11-01")}) 
+CREATE (u) - [r : ENROLLED_TO] -> (m)
+11.	MATCH (u : user{user_name : "akshay"}), (m : module{module_name :"IPM",start_date :date("2019-04-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
 12.	MATCH (u : user{user_name : "akshay"}), (m : module{module_name :"SDP",start_date :date("2019-05-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-13.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"ACS"}) 
+13.	MATCH (u : user{user_name : "sanket"}), (m : module{module_name :"ACS", start_date :date( "2018-12-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-14.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"ACS"}) 
+14.	MATCH (u : user{user_name : "vaibhav"}), (m : module{module_name :"ACS" start_date :date( "2018-12-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-15.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"SAP Technology"}) 
+15.	MATCH (u : user{user_name : "rahul"}), (m : module{module_name :"SAP Technology", start_date :date( "2018-12-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-16.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"SAP Technology"}) 
+16.	MATCH (u : user{user_name : "viraj"}), (m : module{module_name :"SAP Technology", start_date :date( "2018-12-01")}) 
     CREATE (u) - [r : ENROLLED_TO] -> (m)
-15. MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"SAP Technology"})
+15. MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"SAP Technology", start_date :date( "2018-12-01")})
     CREATE (u) - [r : ENROLLED_TO] -> (m)
 
 Search Queries
@@ -182,7 +182,7 @@ Search Queries
 	  RETURN g.group_name as Group, u.user_name as User, m.module_name as Module ,m.start_date as StartDate, m.end_date as EndDate
 
 14.	User list with enrolled module 
-	  MATCH(n:module{module_name:"IPM"})<-[:ENROLLED_TO]-(m) RETURN 	n.module_name as Module,n.start_date as StartDate, m.user_name
+	  MATCH(n:module{module_name:"IPM"})<-[:ENROLLED_TO]-(m) RETURN n.module_name as Module,n.start_date as StartDate, m.user_name
 
 15.	Users list in Descending order
     MATCH (n:user)
