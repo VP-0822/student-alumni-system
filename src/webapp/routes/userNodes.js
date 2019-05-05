@@ -71,9 +71,9 @@ router.get('/getallrecommendation', (req, res) => {
     userNodesController.getAllRecommendation(req, res, handleSuccessResponse, handleErrorResponse);
 });
 
-router.get('/getcurrentevent', (req, res) => {
+router.get('/getCurrentModules', (req, res) => {
     var userName = req.query.userName;
-    userNodesController.getCurrentEvent(req, res, userName, handleSuccessResponse, handleErrorResponse);
+    userNodesController.getCurrentModules(req, res, userName, handleSuccessResponse, handleErrorResponse);
 });
 
 function handleSuccessResponse(req, res, responseData)
