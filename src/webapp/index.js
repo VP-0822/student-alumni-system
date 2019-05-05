@@ -55,6 +55,9 @@ app.use('/search',userFieldSearch );
 let userDocument = require('./routes/document');
 app.use('/document', userDocument);
 
+let friends = require('./routes/friends');
+app.use('/friends',friends);
+
 //start server
 app.listen(3000, function(){
     console.log('I am listening....')
