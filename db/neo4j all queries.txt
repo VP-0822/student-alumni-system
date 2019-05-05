@@ -52,6 +52,9 @@ create (a)-[f:FOLLOWING {since:date('2019-01-01')}]-> (v)-[f2:FOLLOWING {since:d
 match (a:user {user_name:'ashish'}), (v:user {user_name:'viraj'})
 create (a)-[f:FOLLOWING {since:date('2019-01-09')}]-> (v);
 
+match (a:user {user_name:'vaibhav'}), (v:user {user_name:'viraj'})
+create (v)-[f:FOLLOWING {since:date('2019-02-09')}]-> (a);
+
 match (a:user {user_name:'akansha'}), (a2:user {user_name:'ashish'})
 create (a2)-[f:FOLLOWING {since:date('2019-01-07')}]-> (a);
 

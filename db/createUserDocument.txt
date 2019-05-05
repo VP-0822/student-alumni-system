@@ -6,6 +6,6 @@ db.userDocument.insert({
 	"file_url": "https://tinyurl.com/degree",
 	"file_category":"document",
 	"created_at": new Date(),
-	"tags": ["c#"],
+	"tags": ["C#"],
 	"version":1
 });
