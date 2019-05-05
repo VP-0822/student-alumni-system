@@ -74,9 +74,6 @@ create (a)-[f:FOLLOWING {since:date('2019-02-23')}]-> (v);
 match (u:user {user_name:'akansha'}), (e:event {event_id:'4'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-01'),is_organiser:true}] -> (e);
 
-match (u:user {user_name:'viraj'}), (e:event {event_id:'5'})
-create (u) -[:PARTICIPATED_IN {date:date('2019-03-04'),is_organiser:false}] -> (e);
-
 match (u:user {user_name:'ashish'}), (e:event {event_id:'5'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-07'),is_organiser:true}] -> (e);
 
