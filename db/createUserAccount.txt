@@ -9,7 +9,7 @@ db.userAccount.insert({
       "ringstarsse41",
       "wiesenbach"
    ],
-   "dob":"19/12/1993",
+   "dob":new Date("1993-12-11"),
    "gender":"male",
    "photo":"path",
    "education_background":[  
@@ -32,7 +32,7 @@ db.userAccount.insert({
                      "vaibhav",
                      "sarang"
                   ],
-                  "date":"2/2/2019",
+                  "date":new Date("2019-01-01"),
                   "references":[  
                      "qwe",
                      "rty"
@@ -56,6 +56,207 @@ db.userAccount.insert({
                "singh"
             ],
             "date":new Date("2019-12-11"),
+            "references":[  
+               "abc",
+               "abcdf"
+            ]
+         }
+      }
+   ]
+}
+)
+
+db.userAccount.insert({  
+   "user_name":"sanket",
+   "email":"think.sanketwarambhe@gmail.com",
+   "password":"123",
+   "first_name":"sanket",
+   "last_name":"warambhe",
+   "address":[  
+      "mps3",
+      "wiesenbach"
+   ],
+   "dob":new Date("1993-01-01"),
+   "gender":"male",
+   "photo":"path",
+   "education_background":[  
+      {  
+         "degree_name":"Msc",
+         "start_date":new Date("2018-12-11"),
+         "end_date":new Date("2020-12-11"),
+         "university_name":"SRH",
+         "grade":"2",
+         "projects":[  
+            {  
+               "name":"SAD",
+               "description":"SAD",
+               "tags":[  
+                  "nodejs",
+                  "c"
+               ],
+               "members":{  
+                  "name":[  
+                     "vaibhav",
+                     "sarang"
+                  ],
+                  "date":new Date(2019-01-01),
+                  "references":[  
+                     "qwe",
+                     "rty"
+                  ]
+               }
+            }
+         ]
+      }
+   ],
+   "research_work":[  
+      {  
+         "name":"data science",
+         "description":"abc",
+         "tags":[  
+            "data science",
+            "Hidden markov model"
+         ],
+         "members":{  
+            "name":[  
+               "vaibhav",
+               "singh"
+            ],
+            "date":new Date("2019-12-11"),
+            "references":[  
+               "abc",
+               "abcdf"
+            ]
+         }
+      }
+   ]
+}
+)
+
+db.userAccount.insert({  
+   "user_name":"sarang",
+   "email":"think.sarang@gmail.com",
+   "password":"123",
+   "first_name":"sarang",
+   "last_name":"samarth",
+   "address":[  
+      "mps3",
+      "bs13"
+   ],
+   "dob":new Date("1993-05-05"),
+   "gender":"male",
+   "photo":"path",
+   "education_background":[  
+      {  
+         "degree_name":"Mba",
+         "start_date":new Date("2016-12-11"),
+         "end_date":new Date("20218-12-11"),
+         "university_name":"SRH",
+         "grade":"2",
+         "projects":[  
+            {  
+               "name":"Information System",
+               "description":"Neo4j",
+               "tags":[  
+                  "nodejs",
+                  "vscode"
+               ],
+               "members":{  
+                  "name":[  
+                     "akanksha",
+                     "sarang"
+                  ],
+                  "date":new Date(2017-01-01),
+                  "references":[  
+                     "asd",
+                     "rty"
+                  ]
+               }
+            }
+         ]
+      }
+   ],
+   "research_work":[  
+      {  
+         "name":"Deep Learning",
+         "description":"sentimental Analysis",
+         "tags":[  
+            "Twitter Sentimental analysis",
+            "Bayesian Network"
+         ],
+         "members":{  
+            "name":[  
+               "akanksha",
+               "singh"
+            ],
+            "date":new Date("2018-07-11"),
+            "references":[  
+               "abc",
+               "abcdf"
+            ]
+         }
+      }
+   ]
+}
+)
+
+db.userAccount.insert({  
+   "user_name":"viraj",
+   "email":"viraj@gmail.com",
+   "password":"123",
+   "first_name":"viraj",
+   "last_name":"patel",
+   "address":[  
+      "Dossenheim"
+      
+   ],
+   "dob":new Date("1995-02-01"),
+   "gender":"male",
+   "photo":"path",
+   "education_background":[  
+      {  
+         "degree_name":"Msc",
+         "start_date":new Date("2012-12-11"),
+         "end_date":new Date("2014-12-11"),
+         "university_name":"SRH",
+         "grade":"1",
+         "projects":[  
+            {  
+               "name":"SDP",
+               "description":"bike hire system",
+               "tags":[  
+                  "java",
+                  "eclipse"
+               ],
+               "members":{  
+                  "name":[  
+                     "gautam",
+                     "sauptik"
+                  ],
+                  "date":new Date(2013-01-01),
+                  "references":[  
+                     "qwe",
+                     "rty"
+                  ]
+               }
+            }
+         ]
+      }
+   ],
+   "research_work":[  
+      {  
+         "name":"SAP Analytics",
+         "description":"SAP",
+         "tags":[  
+            "ERP",
+           
+         ],
+         "members":{  
+            "name":[  
+               "rahul",
+               "vaibhav"
+            ],
+            "date":new Date("2015-12-11"),
             "references":[  
                "abc",
                "abcdf"

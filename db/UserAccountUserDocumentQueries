@@ -1,0 +1,46 @@
+1.NUMBER OF REGISTERED STUDENTS
+	db.useraccount.count({})
+	
+2. USER PROFILE DETAILS
+	db.useraccount.find({user_name:"viraj"})
+	
+3.UPDATE A SPECIFIC FIELD IN USER PROFILE
+//updating the description of a research work
+		db.useraccount.updateOne(
+									{user_name:"sarang"},
+									{
+									$set: {research_work: "wolframalpha", description: "text for math recognition"}
+									}
+								)
+								
+4. VIEW ALL THE NAMES OF STUDENTS WITH RESEARCH WORK IN A SPECIFIC FIELD
+//as an admin or user finding name of the students who have research_work in a particular field.
+		db.useraccount.find (
+							{"research_work.tags":"data science"},{first_name:1}
+
+							)
+							
+5.VIEW ALL THE NAMES OF THE MEMBERS WHO HAVE WORKED ON A SPECIFIC PROJECT
+//as an admin or user I want to know the name of the students who have worked on project ACS
+ db.useraccount.find(
+						{"education_background.projects.name":"ACS"},{"education_background.projects.members.name":1
+						}
+					)
+					
+					
+6.UPDATING DOCUMENTS IN USERDOCUMENTS COLLECTION AND VERSION CONTROL					
+//as an user I want to update my cv url and the version should increment everytime I update					
+					db.userDocument.update({user_name:"vaibhav"}, { $set: {"file_url": "www.yahoo.com"}, $inc: {version:1} })
+					
+					
+
+7.OPTION TO SHARE RESEARCH DOCUMENTS WITH FOLLOWERS HAVING SIMILAR SKILLS
+//as an user I want to share my recently uploaded document on a specific skill to my followers having same skills
+
+	db.userDocument.find({user_name:"vaibhav",tags:"c#"},{file_url:1})
+	
+	match (u:user {user_name: 'vaibhav'}) <-[f:FOLLOWING]- (v:user) -[s:SKILLED_IN]-> (t:skill) where t.skill_name = 'C#'
+	return v.user_name  // to get the user names of people who have skill c#. Now we can give option to share the document.
+	
+	Adding to this user story when user uploads some presentation or a project report then there will be presentors or members of the project. So this can be used to share your report to  the members of presentors.
+ 

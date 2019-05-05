@@ -1,26 +1,26 @@
 **CREATE EVENTS**
-create (e:event {event_id:'1',event_name:'hackathon',category:'competition',loaction:'SRH University Arc 001', event_date:date('2019-04-01')})
-create (e:event {event_id:'2',event_name:'design thinking',category:'lecture',loaction:'SRH University T025', event_date:date('2019-04-15')})
+create (e:event {event_id:'4',event_name:'hackathon',category:'competition',loaction:'SRH University Arc 001', event_date:date('2019-04-01')})
+create (e:event {event_id:'5',event_name:'design thinking',category:'lecture',loaction:'SRH University T025', event_date:date('2019-04-15')})
 
 **CREATE RELATIONSHIPS**
 match (u:user {user_name:'akansha'})
-match (e:event {event_id:'1'})
+match (e:event {event_id:'4'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-01'),is_organiser:true}] -> (e)
 
 match (u:user {user_name:'viraj'})
-match (e:event {event_id:'1'})
+match (e:event {event_id:'5'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-04'),is_organiser:false}] -> (e)
 
 match (u:user {user_name:'ashish'})
-match (e:event {event_id:'2'})
+match (e:event {event_id:'5'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-07'),is_organiser:true}] -> (e)
 
 match (u:user {user_name:'akansha'})
-match (e:event {event_id:'2'})
+match (e:event {event_id:'5'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-10'),is_organiser:false}] -> (e)
 
 match (u:user {user_name:'viraj'})
-match (e:event {event_id:'2'})
+match (e:event {event_id:'5'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-11'),is_organiser:false}] -> (e)
 
 **SELECT QUERY**
@@ -47,7 +47,7 @@ return u,e
 ###### Change event date
 
 match (e:event)
-where e.event_id = '2'
+where e.event_id = '5'
 set e.event_date = date('2019-04-17')
 return e
 

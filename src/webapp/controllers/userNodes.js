@@ -114,3 +114,93 @@ exports.UsersParticipation = function(req, res,userName, organiser, eventId, han
         handleErrorResponse(req, res, err);
     });
 }
+
+exports.getUserComments = function (req, res, userName, handleSuccessResponse, handleErrorResponse){
+    var query = "match (u:user {user_name:'"+userName+"'}) -[g:GAVE_FEEDBACK]-> (e:event) return u.user_name as `User Name`, e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating`";
+
+    session.run(query).then(result=> {
+        var returnResults = [];
+        result.records.forEach(element => {
+            returnResults.push(element._fields);
+        });
+        handleSuccessResponse(req, res, returnResults);
+    }).catch(function(err){
+        handleErrorResponse(req, res, err);
+    });
+}
+
+exports.getEventComments = function (req, res, eventID, handleSuccessResponse, handleErrorResponse){
+    var query = "match (e:event {event_id:'"+eventID+"'}) <-[g:GAVE_FEEDBACK]- (u:user) return e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating`, u.user_name as `User Name`";
+
+    session.run(query).then(result=> {
+        var returnResults = [];
+        result.records.forEach(element => {
+            returnResults.push(element._fields);
+        });
+        handleSuccessResponse(req, res, returnResults);
+    }).catch(function(err){
+        handleErrorResponse(req, res, err);
+    });
+}
+
+exports.getAllRecommendation= function(req, res, handleSuccessResponse, handleErrorResponse){
+    var query = "MATCH (n:user) - [r:RECOMMENDATION_COMMENT] -> (m:user) RETURN n.full_name as Recommender,m.full_name as Recommendant,r.comment as Comment ,r.date as Date";
+   
+    session.run(query).then(result=> {
+        var returnResults = [];
+        result.records.forEach(element => {
+            returnResults.push(element._fields);
+        });
+        handleSuccessResponse(req, res, returnResults);
+    }).catch(function(err){
+        handleErrorResponse(req, res, err);
+    });
+}
+
+exports.getCurrentEvent= function(req, res, userName, handleSuccessResponse, handleErrorResponse){
+    var query = "match (u:user {user_name:'"+userName+"'})-[e:ENROLLED_TO]->(m:module) where m.start_date <=  date() and m.end_date >= date() return u.full_name as Student, m.module_name as Module, m.appointments as Time";
+
+    session.run(query).then(result=> {
+        var returnResults = [];
+        result.records.forEach(element => {
+            returnResults.push(element._fields);
+        });
+        handleSuccessResponse(req, res, returnResults);
+    }).catch(function(err){
+        handleErrorResponse(req, res, err);
+    });
+}
+
+exports.getUserTypeComments = function (req, res, userType, handleSuccessResponse, handleErrorResponse){
+    var query = "match (u:user {type:'"+userType+"'}) -[g:GAVE_FEEDBACK]-> (e:event) return u.user_name as `Student User Name`, e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating`";
+
+    session.run(query).then(result=> {
+        var returnResults = [];
+        result.records.forEach(element => {
+            returnResults.push(element._fields);
+        });
+        handleSuccessResponse(req, res, returnResults);
+    }).catch(function(err){
+        handleErrorResponse(req, res, err);
+    });
+}
+
+exports.addComment = function(req, res, requestData, handleSuccessResponse, handleErrorResponse){
+    var username = requestData.user_name;
+    var eventID = requestData.eventID;
+    var comment = requestData.comment;
+    var rating = requestData.rating;
+
+    var query = "match (u:user {user_name:'"+username+"'}) -[p:PARTICIPATED_IN]-> (e:event {event_id:'"+eventID+"'}) create (u)-[g:GAVE_FEEDBACK {comment:'"+comment+"', rating:'"+rating+"'}]->(e) return u.user_name as `User Name`, e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating` ";
+
+    session.run(query).then(result=> {
+        var returnResults = [];
+        result.records.forEach(element => {
+            returnResults.push(element._fields);
+        });
+        handleSuccessResponse(req, res, returnResults);
+    }).catch(function(err){
+        handleErrorResponse(req, res, err);
+    });
+
+}
