@@ -124,28 +124,31 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
         var notificationUserListPromise = [];
         //TODO: Handle async events
         tags.forEach(function (tag) {
-            var args = [];
-            var tagnamekey = tag.toLowerCase();
-            tagnamekey = tagnamekey.replace(/ /g, '_');
-            var channelNameKey = channelName.toLowerCase();
-            channelNameKey = channelNameKey.replace(/ /g, '_');
-            args.push(channelNameKey + ':' + tagnamekey);
-            args.push(0);
-            args.push(10);
-            client.zrevrange(args, function (err, response) {
-                var reversePromise = new Promise(function(resolve, reject){
+            var reversePromise = new Promise(function(resolve, reject){
+                var tagnamekey = tag.toLowerCase();
+                tagnamekey = tagnamekey.replace(/ /g, '_');
+                var channelNameKey = channelName.toLowerCase();
+                channelNameKey = channelNameKey.replace(/ /g, '_');
+                var args = [];
+                args.push(channelNameKey + ':' + tagnamekey);
+                args.push(0);
+                args.push(10);
+                client.zrevrange(args, function (err, response) {
                     if (err) reject(err);
                     resolve(response);
                 });
-                notificationUserListPromise.push(reversePromise);
             });
+            notificationUserListPromise.push(reversePromise);
         });
         Promise.all(notificationUserListPromise).then(function (results) {
-            var returnNotificationList = [];
+            var returnNotificationSet = new Set();
             results.forEach(function (eachResult){
-                returnNotificationList.push(eachResult);
+                eachResult.forEach(function (eachUser){
+                    returnNotificationSet.add(eachUser);
+                });
             });
-            handleSuccessResponse(req, res, {data: returnResults, notificationList: returnNotificationList});
+            console.log(returnNotificationSet);
+            handleSuccessResponse(req, res, {data: returnResults, notificationList: Array.from(returnNotificationSet)});
         }).catch(function (error) {
             handleErrorResponse(req, res, error);
         });
