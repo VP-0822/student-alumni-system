@@ -93,7 +93,7 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
     }
     var view = requestData.view;
 
-    var query = "match (u:user {user_name:'"+userName+"'}), (c:channel {channel_name:'"+channelName+"'}) create (u) -[:CREATED {date:date('"+queryDateAsString+"')}]-> (p:post {data:'"+postData+"', tags:"+tagsString+"}) -[:ON {view:'"+view+"'}]-> (c) return u,c,p"
+    var query = "match (u:user {user_name:'"+userName+"'}) -[:FOLLOWS]-> (c:channel {channel_name:'"+channelName+"'}) create (u) -[:CREATED {date:date('"+queryDateAsString+"')}]-> (p:post {data:'"+postData+"', tags:"+tagsString+"}) -[:ON {view:'"+view+"'}]-> (c) return u,c,p"
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {
@@ -121,7 +121,7 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
         });
 
         //prepare notification list
-        var notificationUserList = [];
+        var notificationUserListPromise = [];
         //TODO: Handle async events
         tags.forEach(function (tag) {
             var args = [];
@@ -133,11 +133,22 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
             args.push(0);
             args.push(10);
             client.zrevrange(args, function (err, response) {
-                if (err) throw err;
-                notificationUserList = notificationUserList.concat(response);
+                var reversePromise = new Promise(function(resolve, reject){
+                    if (err) reject(err);
+                    resolve(response);
+                });
+                notificationUserListPromise.push(reversePromise);
             });
         });
-        handleSuccessResponse(req, res, {data: returnResults, notificationList: notificationUserList});
+        Promise.all(notificationUserListPromise).then(function (results) {
+            var returnNotificationList = [];
+            results.forEach(function (eachResult){
+                returnNotificationList.push(eachResult);
+            });
+            handleSuccessResponse(req, res, {data: returnResults, notificationList: returnNotificationList});
+        }).catch(function (error) {
+            handleErrorResponse(req, res, error);
+        });
     }).catch(function(err){
         handleErrorResponse(req, res, err);
     });
