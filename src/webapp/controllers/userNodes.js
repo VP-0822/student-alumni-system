@@ -173,7 +173,7 @@ exports.getCurrentModules= function(req, res, userName, handleSuccessResponse, h
         result.records.forEach(element => {
             returnResults.push(element._fields);
         });
-        handleSuccessResponse(req, res, {tableHeader: tableHeaderKeys, tableItems: returnResults);
+        handleSuccessResponse(req, res, {tableHeader: tableHeaderKeys, tableItems: returnResults});
     }).catch(function(err){
         handleErrorResponse(req, res, err);
     });
