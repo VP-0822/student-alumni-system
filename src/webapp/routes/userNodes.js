@@ -48,6 +48,26 @@ router.get('/participate', function(req, res){
     userNodesController.UsersParticipation(req, res, userName, organiser,eventId, handleSuccessResponse, handleErrorResponse); 
 });
 
+router.get('/usercomments',(req, res)=>{
+    var userName = req.query.userName;
+    userNodesController.getUserComments(req, res, userName, handleSuccessResponse, handleErrorResponse);
+});
+
+router.get('/eventcomments', (req, res) => {
+    var eventID = req.query.eventID;
+    userNodesController.getEventComments(req, res, eventID, handleSuccessResponse, handleErrorResponse);
+});
+
+router.get('/usertypecomment', (req, res) => {
+    var userType = req.query.userType;
+    userNodesController.getUserTypeComments(req, res, userType, handleSuccessResponse, handleErrorResponse);
+});
+
+router.post('/addcomment', (req, res) => {
+    var requestData = req.body;
+    userNodesController.addComment(req, res, requestData, handleSuccessResponse, handleErrorResponse);
+})
+
 function handleSuccessResponse(req, res, responseData)
 {
     if(responseData)
