@@ -3,9 +3,9 @@ db.createCollection("userDocument");
 db.userDocument.insert({
 	"user_name":"vaibhav",
 	"file_title":"degree",
-	"file_url": "www.google.com",
+	"file_url": "https://tinyurl.com/degree",
 	"file_category":"document",
 	"created_at": new Date(),
-	"tags": ["imp", "ml"],
+	"tags": ["c#"],
 	"version":1
 });
