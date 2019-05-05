@@ -4,7 +4,7 @@ const router = express.Router();
 const friendsController = require('../controllers/friend');
 
 router.get('/inCommon', function(req, res){
-    var userName = req.userName;
+    var userName = req.query.userName;
     friendsController.findFriendsInCommon(req, res, userName, handleSuccessResponse, handleErrorResponse);
 });
 

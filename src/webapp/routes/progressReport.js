@@ -9,8 +9,6 @@ router.get('/top5score', function(req, res){
 });
 function handleSuccessResponse(req, res, responseData, displayMessage)
 {
-
-    console.log("success")
     if(displayMessage)
     {
         req.flash('success', displayMessage);

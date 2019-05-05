@@ -8,9 +8,9 @@ exports.getDocumentTags = function(req, res, userName, fileName, handleSuccessRe
             return;
         }
         //match (u:user {user_name: 'vaibhav'}) <-[f:FOLLOWING]- (v:user) -[s:SKILLED_IN]-> (t:skill) where t.skill_name = 'C#' return v.user_name
-        if(responseData.tags) {
-            responseData.tags.forEach(function(tag){
-                var query = "match (u:user {user_name: 'vaibhav'}) <-[f:FOLLOWING]- (v:user) -[s:SKILLED_IN]-> (t:skill) where t.skill_name = '"+tag+"' return v.user_name as User Name";
+        if(responseData[0].tags) {
+            responseData[0].tags.forEach(function(tag){
+                var query = "match (u:user {user_name: 'vaibhav'}) <-[f:FOLLOWING]- (v:user) -[s:SKILLED_IN]-> (t:skill) where t.skill_name = '"+tag+"' return v.user_name as `User Name`";
                 session.run(query).then(function(result){
                     var returnResults = [];
                     var tableHeaderKeys;
@@ -27,8 +27,6 @@ exports.getDocumentTags = function(req, res, userName, fileName, handleSuccessRe
                 });
             });
         }
-
-        handleSuccessResponse(req, res, responseData);
     });
     return
 }

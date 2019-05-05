@@ -147,7 +147,6 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
                     returnNotificationSet.add(eachUser);
                 });
             });
-            console.log(returnNotificationSet);
             handleSuccessResponse(req, res, {data: returnResults, notificationList: Array.from(returnNotificationSet)});
         }).catch(function (error) {
             handleErrorResponse(req, res, error);
