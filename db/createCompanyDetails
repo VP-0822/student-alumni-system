@@ -1,4 +1,6 @@
-[
+db.createCollection("companyDetails");
+
+db.companyDetails.insertMany([
   {
     "company_name": "vivo",
     "company_details": "fhvhvbj",
@@ -48,4 +50,4 @@
     "location": "stuttgart",
     "website": "oneplus.com"
   }
-]
+]);

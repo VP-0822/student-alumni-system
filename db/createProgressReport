@@ -1,4 +1,6 @@
-[
+db.createCollection("progressReport");
+
+db.progressReport.insertMany([
   {
     "user_name": "sarang",
     "module": [
@@ -168,4 +170,4 @@
     }
   ]
 }
-]
+]);
