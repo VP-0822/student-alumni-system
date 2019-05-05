@@ -42,6 +42,13 @@ app.use('/userChat', messages);
 let events = require('./routes/userNodes');
 app.use('/users', events);
 
+let progressReport = require('./routes/progressReport');
+app.use('/report', progressReport);
+
+let userDomain = require('./routes/userDomain');
+app.use('/domain', userDomain);
+
+
 //start server
 app.listen(3000, function(){
     console.log('I am listening....')
