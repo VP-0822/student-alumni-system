@@ -40,7 +40,7 @@ exports.getUsersFollowersList = function(req, res, userName, handleSuccessRespon
 }
 
 exports.getUsersFollowersSkillList = function(req, res, userName, handleSuccessResponse, handleErrorResponse){
-    var query = "match (n:user{user_name:'"+userName+"'})- [f:FOLLOWING]-> (k:user)-[:SKILLED_IN]->(p:skill) return p {.skill_name, users: collect(k {.user_name, .type})}"
+    var query = "match (n:user{user_name:'"+userName+"'})- [f:FOLLOWING]-> (k:user)-[:SKILLED_IN]->(p:skill) return p {.skill_name, users: collect(k {.user_name})}"
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {

@@ -5,7 +5,6 @@ const messageController = require('../controllers/userFieldSearch')
 
 router.get('/projectmembers', function(req, res){
     let projectName = req.query.projectname;
-    console.log(projectName);
     messageController.searchProjectMembers(req, res, projectName, handleSuccessResponse, handleErrorResponse);
         
 });
