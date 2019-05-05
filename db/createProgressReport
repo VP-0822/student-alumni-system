@@ -1,4 +1,4 @@
-[
+db.progress_report.insertMany([
   {
     "user_name": "sarang",
     "module": [
@@ -168,4 +168,4 @@
     }
   ]
 }
-]
+]);
