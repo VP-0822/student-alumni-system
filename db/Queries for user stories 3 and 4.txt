@@ -73,13 +73,13 @@ User Story: 6
 
 2. Module: module_name, start_date, appointments : [], lecturers:[]
 
-1.	CREATE (m:module{module_name:"IPM", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") ,appointments:["Mon-Thu: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]})
-2.	CREATE (m:module{module_name:"SAD", start_date: date("2018-11-01")  ,end_date: date("2018-11-30"),appointments:["Mon-Wed: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Christoph Hahn"]})
-3.	CREATE (m:module{module_name:"SDP", start_date: date("2018-11-01")  ,end_date: date("2019-11-30"),appointments:["Mon-Wed: 2pm to 5pm"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]})
-4.	CREATE (m:module{module_name:"SAP Technology", start_date: date("2018-12-01")  ,end_date: date("2018-12-31"),appointments:["Mon-Wed: 2pm to 5pm" ,"Fri: 9am to 5pm"], lecturers:["Prof.Joachim Brauch"]})
-5.	CREATE (m:module{module_name:"ACS", start_date: date("2018-12-01") ,end_date: date("2018-12-31"),appointments:["Mon: 2pm to 5pm" ,"Wed: 2pm to 5pm", "Fri: 9am to 5pm"], lecturers:["Prof.Dr.Mohammed Yass"]})
-6.	CREATE (m:module{module_name:"IPM", start_date: date("2019-04-01")  ,end_date: date("2019-04-30") ,appointments:["Mon-Thu: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]})
-7.	CREATE (m:module{module_name:"SDP", start_date:date("2019-05-01") ,end_date:date("2019-05-31"),appointments:["Mon-Wed: 2pm to 5pm"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]})
+1.	CREATE (m:module{module_name:"IPM", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") ,appointments:["2018-10-02 9:00_to_12:00","2018-10-03 9:00_to_12:00"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]})
+2.	CREATE (m:module{module_name:"SAD", start_date: date("2018-11-01")  ,end_date: date("2018-11-30"),appointments:["2018-11-03 14:00_to_17:00","2018-11-05 9:00_to_12:00"], lecturers:["Prof.Christoph Hahn"]})
+3.	CREATE (m:module{module_name:"SDP", start_date: date("2018-11-01")  ,end_date: date("2019-11-30"),appointments:["2018-11-01 9:00_to_12:00","2018-11-06 9:00_to_12:00"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]})
+4.	CREATE (m:module{module_name:"SAP Technology", start_date: date("2018-12-01")  ,end_date: date("2018-12-31"),appointments:["2018-12-10 9:00_to_12:00","2018-12-11 9:00_to_12:00"], lecturers:["Prof.Joachim Brauch"]})
+5.	CREATE (m:module{module_name:"ACS", start_date: date("2018-12-01") ,end_date: date("2018-12-31"),appointments:["2018-12-02 9:00_to_12:00","2018-12-03 9:00_to_12:00"], lecturers:["Prof.Dr.Mohammed Yass"]})
+6.	CREATE (m:module{module_name:"IPM", start_date: date("2019-04-01")  ,end_date: date("2019-04-30") ,appointments:["2019-04-01 9:00_to_17:00"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]})
+7.	CREATE (m:module{module_name:"SDP", start_date:date("2019-05-01") ,end_date:date("2019-05-31"),appointments:["2019-05-06 9:00_to_12:00"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]})
 
 
 3.Creating relation between user and group
