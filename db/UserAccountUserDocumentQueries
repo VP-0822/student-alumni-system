@@ -39,7 +39,7 @@
 
 	db.userDocument.find({user_name:"vaibhav",tags:"c#"},{file_url:1})
 	
-	match (u:user {user_name: 'vaibhav'}) -[f:FOLLOWING]-> (v:user) -[s:SKILLED_IN]-> (t:skill) where t.skill_name = 'C#'
+	match (u:user {user_name: 'vaibhav'}) <-[f:FOLLOWING]- (v:user) -[s:SKILLED_IN]-> (t:skill) where t.skill_name = 'C#'
 	return v.user_name  // to get the user names of people who have skill c#. Now we can give option to share the document.
 	
 	Adding to this user story when user uploads some presentation or a project report then there will be presentors or members of the project. So this can be used to share your report to  the members of presentors.
