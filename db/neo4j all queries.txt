@@ -34,16 +34,16 @@ CREATE (s:skill{skill_name:"MongoDB"});
 CREATE (s:skill{skill_name:"Python"});
 
 //Create events
-create (e:event {event_id:'1',event_name:'Campus Rally',category:'orientation',location:'SRH University Campus', event_date:date('2019-04-01')});
-create (e:event {event_id:'2',event_name:'SAP Guest Lecture',category:'guest lecture',location:'Blue Tower, ARC 201', event_date:date('2019-03-20')});
-create (e:event {event_id:'3',event_name:'Job Fair',category:'workshop',location:'SRH University Campus', event_date:date('2019-04-10')});
-create (e:event {event_id:'4',event_name:'hackathon',category:'competition',location:'SRH University Arc 001', event_date:date('2019-04-01')});
-create (e:event {event_id:'5',event_name:'design thinking',category:'lecture',location:'SRH University T025', event_date:date('2019-04-15')});
+create (e:event {event_id:'1',event_name:'Campus Rally',category:'orientation',location:'SRH University Campus', event_date:date('2019-04-01'), tags:['Campus tour', 'orientation']});
+create (e:event {event_id:'2',event_name:'SAP Guest Lecture',category:'guest lecture',location:'Blue Tower, ARC 201', event_date:date('2019-03-20'), tags:['Cloud Computing', 'SAP Technologies', 'Business Computing']});
+create (e:event {event_id:'3',event_name:'Job Fair',category:'workshop',location:'SRH University Campus', event_date:date('2019-04-10'), tags:['Job', 'Resume', 'Job Interview']});
+create (e:event {event_id:'4',event_name:'hackathon',category:'competition',location:'SRH University Arc 001', event_date:date('2019-04-01'), tags:['programming', 'innovation', 'hackathon']});
+create (e:event {event_id:'5',event_name:'Introduction to design thinking techniques',category:'lecture',location:'SRH University T025', event_date:date('2019-04-15'), tags:['Design Thinking', 'Problem Solving', 'User Stories']});
 
 //Create channels
-create (c:channel {channel_name:'Machine Learning', category: 'Technology', tags: ['Computer Science', 'Machine Learning','Big Data'], creation_date: date('2019-02-01')});
-create (c:channel {channel_name:'ACS Oct 2018', category: 'Group', tags: ['ACS', 'October','2018', 'Student Group'], creation_date: date('2018-09-01')});
-create (c:channel {channel_name:'Mainframe', category: 'Technology', tags: ['Computer Science', 'Mainframe','Banking'], creation_date: date('2019-01-01')});
+create (c:channel {channel_id: '1', channel_name:'Introduction to Machine Learning', category: 'Technology', tags: ['Computer Science', 'Machine Learning','Classification algorithm', 'Regression algorithm', 'Python'], creation_date: date('2019-02-01')});
+create (c:channel {channel_id: '2', channel_name:'ACS Oct 2018 Discussion Forum', category: 'Group', tags: ['ACS', 'October','2018', 'Student Group'], creation_date: date('2018-09-01')});
+create (c:channel {channel_id: '3', channel_name:'Introduction to Mainframe technologies', category: 'Technology', tags: ['Computer Science', 'Mainframe','Banking Sector', 'COBOL'], creation_date: date('2019-01-01')});
 
 //Create following relationship
 match(a:user {user_name:'akansha'}), (v:user {user_name:'viraj'})
@@ -128,36 +128,36 @@ create (u)-[:GAVE_FEEDBACK {comment:'Great interaction with the company represen
 
 
 //Create relationship for following channels
-match (u:user {user_name:'akansha'}), (c:channel {channel_name:'ACS Oct 2018'})
+match (u:user {user_name:'akansha'}), (c:channel {channel_id:'2'})
 create (u) -[:FOLLOWS {since:date('2018-10-02'), is_owner:false, is_moderator: true}] -> (c);
 
-match (u:user {user_name:'viraj'}), (c:channel {channel_name:'ACS Oct 2018'})
+match (u:user {user_name:'viraj'}), (c:channel {channel_id:'2'})
 create (u) -[:FOLLOWS {since:date('2018-10-10'), is_owner:false, is_moderator: false}] -> (c);
 
-match (u:user {user_name:'viraj'}), (c:channel {channel_name:'Machine Learning'})
+match (u:user {user_name:'viraj'}), (c:channel {channel_id:'1'})
 create (u) -[:FOLLOWS {since:date('2019-02-01'), is_owner: true, is_moderator: true}] -> (c);
 
-match (u:user {user_name:'akansha'}), (c:channel {channel_name:'Mainframe'})
+match (u:user {user_name:'akansha'}), (c:channel {channel_id:'3'})
 create (u) -[:FOLLOWS {since:date('2019-01-01'), is_owner: true, is_moderator: true}] -> (c);
 
-match (u:user {user_name:'akansha'}), (c:channel {channel_name:'Machine Learning'})
+match (u:user {user_name:'akansha'}), (c:channel {channel_id:'1'})
 create (u) -[:FOLLOWS {since:date('2019-02-04'), is_owner: false, is_moderator: true}] -> (c);
 
-match (u:user {user_name:'ashish'}), (c:channel {channel_name:'Machine Learning'})
+match (u:user {user_name:'ashish'}), (c:channel {channel_id:'1'})
 create (u) -[:FOLLOWS {since:date('2019-02-06'), is_owner: false, is_moderator: false}] -> (c);
 
 
 //Create new posts
-match (u:user {user_name:'ashish'}) -[:FOLLOWS]-> (c:channel {channel_name:'Machine Learning'})
+match (u:user {user_name:'ashish'}) -[:FOLLOWS]-> (c:channel {channel_id:'1'})
 create (u) -[:CREATED {date:date('2019-02-08')}]-> (p:post {data:'Hello I found interesting dataset for image recognition...', tags:['image recognition', 'python', 'opencv']}) -[:ON {view:'public'}]-> (c);
 
-match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_name:'Machine Learning'})
+match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_id:'1'})
 create (u) -[:CREATED {date:date('2019-02-09')}]-> (p:post {data:'Hello All, Let us all meet to discuss on interesting findings on regression algorithm', tags:['machine learning', 'python', 'regression']}) -[:ON {view:'private'}]-> (c);
 
-match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_name:'ACS Oct 2018'})
+match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_id:'2'})
 create (u) -[:CREATED {date:date('2019-01-03')}]-> (p:post {data:'Hello All, BBQ Party is on this Friday. Do join. :)', tags:['party', 'celebration']}) -[:ON {view:'private'}]-> (c);
 
-match (u:user {user_name:'akansha'}) -[:FOLLOWS]-> (c:channel {channel_name:'ACS Oct 2018'})
+match (u:user {user_name:'akansha'}) -[:FOLLOWS]-> (c:channel {channel_id:'2'})
 create (u) -[:CREATED {date:date('2019-10-15')}]-> (p:post {data:'Hello All, Meet up for all ACS students to discuss about course.', tags:['ACS', 'course']}) -[:ON {view:'public'}]-> (c);
 
 
