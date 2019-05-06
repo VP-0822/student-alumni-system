@@ -1,0 +1,29 @@
+match (u:user {user_name:'sanket'}) -[p:PARTICIPATED_IN]-> (e:event {event_id:'1'})
+create (u)-[:GAVE_FEEDBACK {comment:'Awesome Event!', rating:'10'}]->(e) 
+
+match (u:user {user_name:'sanket'}) -[p:PARTICIPATED_IN]-> (e:event {event_id:'3'})
+create (u)-[:GAVE_FEEDBACK {comment:'Learned about many new companies', rating:'9'}]->(e)
+
+match (u:user {user_name:'sarang'}) -[p:PARTICIPATED_IN]-> (e:event {event_id:'2'})
+create (u)-[:GAVE_FEEDBACK {comment:'Got a great insight about the insight about the SAP products', rating:'10'}]->(e)
+
+match (u:user {user_name:'sarang'}) -[p:PARTICIPATED_IN]-> (e:event {event_id:'3'})
+create (u)-[:GAVE_FEEDBACK {comment:'Got many interview calls after this job fair.', rating:'10'}]->(e)
+
+match (u:user {user_name:'viraj'}) -[p:PARTICIPATED_IN]-> (e:event {event_id:'1'})
+create (u)-[:GAVE_FEEDBACK {comment:'Well Organized event', rating:'9'}]->(e)
+
+match (u:user {user_name:'viraj'}) -[p:PARTICIPATED_IN]-> (e:event {event_id:'3'})
+create (u)-[:GAVE_FEEDBACK {comment:'Great interaction with the company representatives.', rating:'10'}]->(e)
+
+GETTING ALL THE COMMENTS & FEEDBACKS GIVEN BY A USER:done
+
+match (u:user {user_name:'sanket'}) -[g:GAVE_FEEDBACK]-> (e:event) return u.user_name as `User Name`, e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating`
+match (u:user {user_name:'sarang'}) -[g:GAVE_FEEDBACK]-> (e:event) return u.user_name as `User Name`, e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating`
+
+GETTING ALL FEEDBACKS GIVEN TO ANY PARTICULAR EVENT:done
+
+match (e:event {event_id:'1'}) <-[g:GAVE_FEEDBACK]- (u:user) return e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating`, u.user_name as `User Name`
+match (e:event {event_id:'2'}) <-[g:GAVE_FEEDBACK]- (u:user) return e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating`, u.user_name as `User Name`
+match (e:event {event_id:'3'}) <-[g:GAVE_FEEDBACK]- (u:user) return e.event_id as `Event Id`, e.event_name As `Event Name`, g.comment as `Comment`, g.rating as `Rating`, u.user_name as `User Name`
+

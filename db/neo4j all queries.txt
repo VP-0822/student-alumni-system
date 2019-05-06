@@ -14,13 +14,13 @@ CREATE (g:group{group_name:"ACS-Winter2018_Group_2",group_start_date: date("2019
 CREATE (g:group{group_name:"ACS-Summer2019_Group_1",group_start_date: date("2019-04-01") });
 
 //Create modules
-CREATE (m:module{module_name:"IPM", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") ,appointments:["Mon-Thu: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
-CREATE (m:module{module_name:"SAD", start_date: date("2018-11-01")  ,end_date: date("2018-11-30"),appointments:["Mon-Wed: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Christoph Hahn"]});
-CREATE (m:module{module_name:"SDP", start_date: date("2018-11-01")  ,end_date: date("2019-11-30"),appointments:["Mon-Wed: 2pm to 5pm"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
-CREATE (m:module{module_name:"SAP Technology", start_date: date("2018-12-01")  ,end_date: date("2018-12-31"),appointments:["Mon-Wed: 2pm to 5pm" ,"Fri: 9am to 5pm"], lecturers:["Prof.Joachim Brauch"]});
-CREATE (m:module{module_name:"ACS", start_date: date("2018-12-01") ,end_date: date("2018-12-31"),appointments:["Mon: 2pm to 5pm" ,"Wed: 2pm to 5pm", "Fri: 9am to 5pm"], lecturers:["Prof.Dr.Mohammed Yass"]});
-CREATE (m:module{module_name:"IPM", start_date: date("2019-04-01")  ,end_date: date("2019-04-30") ,appointments:["Mon-Thu: 2pm to 5pm","Fri : 9am to 12pm"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
-CREATE (m:module{module_name:"SDP", start_date:date("2019-05-01") ,end_date:date("2019-05-31"),appointments:["Mon-Wed: 2pm to 5pm"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
+CREATE (m:module{module_name:"IPM", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") ,appointments:["2018-10-02 9:00_to_12:00","2018-10-03 9:00_to_12:00"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
+CREATE (m:module{module_name:"SAD", start_date: date("2018-11-01")  ,end_date: date("2018-11-30"),appointments:["2018-11-03 14:00_to_17:00","2018-11-05 9:00_to_12:00"], lecturers:["Prof.Christoph Hahn"]});
+CREATE (m:module{module_name:"SDP", start_date: date("2018-11-01")  ,end_date: date("2019-11-30"),appointments:["2018-11-01 9:00_to_12:00","2018-11-06 9:00_to_12:00"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
+CREATE (m:module{module_name:"SAP Technology", start_date: date("2018-12-01")  ,end_date: date("2018-12-31"),appointments:["2018-12-10 9:00_to_12:00","2018-12-11 9:00_to_12:00"], lecturers:["Prof.Joachim Brauch"]});
+CREATE (m:module{module_name:"ACS", start_date: date("2018-12-01") ,end_date: date("2018-12-31"),appointments:["2018-12-02 9:00_to_12:00","2018-12-03 9:00_to_12:00"], lecturers:["Prof.Dr.Mohammed Yass"]});
+CREATE (m:module{module_name:"IPM", start_date: date("2019-04-01")  ,end_date: date("2019-04-30") ,appointments:["2019-04-01 9:00_to_17:00"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
+CREATE (m:module{module_name:"SDP", start_date:date("2019-05-01") ,end_date:date("2019-05-31"),appointments:["2019-05-06 9:00_to_12:00"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
 
 //Create skills
 CREATE (s:skill{skill_name:"JAVA"});
@@ -52,6 +52,12 @@ create (a)-[f:FOLLOWING {since:date('2019-01-01')}]-> (v)-[f2:FOLLOWING {since:d
 match (a:user {user_name:'ashish'}), (v:user {user_name:'viraj'})
 create (a)-[f:FOLLOWING {since:date('2019-01-09')}]-> (v);
 
+match (a:user {user_name:'akansha'}), (v:user {user_name:'sanket'})
+create (a)-[f:FOLLOWING {since:date('2019-03-09')}]-> (v);
+
+match (a:user {user_name:'vaibhav'}), (v:user {user_name:'viraj'})
+create (v)-[f:FOLLOWING {since:date('2019-02-09')}]-> (a);
+
 match (a:user {user_name:'akansha'}), (a2:user {user_name:'ashish'})
 create (a2)-[f:FOLLOWING {since:date('2019-01-07')}]-> (a);
 
@@ -73,9 +79,6 @@ create (a)-[f:FOLLOWING {since:date('2019-02-23')}]-> (v);
 //Create relationship for event participation
 match (u:user {user_name:'akansha'}), (e:event {event_id:'4'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-01'),is_organiser:true}] -> (e);
-
-match (u:user {user_name:'viraj'}), (e:event {event_id:'5'})
-create (u) -[:PARTICIPATED_IN {date:date('2019-03-04'),is_organiser:false}] -> (e);
 
 match (u:user {user_name:'ashish'}), (e:event {event_id:'5'})
 create (u) -[:PARTICIPATED_IN {date:date('2019-03-07'),is_organiser:true}] -> (e);

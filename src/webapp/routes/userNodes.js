@@ -67,6 +67,12 @@ router.post('/addcomment', (req, res) => {
     var requestData = req.body;
     userNodesController.addComment(req, res, requestData, handleSuccessResponse, handleErrorResponse);
 });
+
+router.get('/getSameSkill', (req, res) =>{
+    var skillName = req.query.skillName;
+    userNodesController.getSameSkill(req, res, skillName, handleSuccessResponse, handleErrorResponse);
+});
+
 router.get('/getallrecommendation', (req, res) => {
     userNodesController.getAllRecommendation(req, res, handleSuccessResponse, handleErrorResponse);
 });
