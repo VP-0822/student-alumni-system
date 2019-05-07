@@ -1,49 +1,66 @@
-//Create User nodes
-create (u:user:student {user_name:'akansha',full_name:'Akansha Pandey'});
-create (u:user:student {user_name:'viraj',full_name:'Viraj Patel'});
-create (u:user:alumni {user_name:'ashish',full_name:'Ashish C'});
-CREATE(u:user:student{user_name:"sanket",full_name:"Sanket Warambhe"});
-CREATE (u:user:student{user_name:"vaibhav",full_name:"Vaibhav Singh"});
-CREATE (u:user:student{user_name:"sarang",full_name:"Sarang Samarth"});
-CREATE (u:user:student{user_name:"rahul",full_name:"Rahul Sonawane"});
-CREATE (u:user:student{user_name:"akshay",full_name:"Akshay Gavandi"});
+//Create User nodes (:user) -[:BELONGS_TO]-> (:batch) , (:user) -[:ENROLLED_TO]-> (:module)
+//  (:user) -[:SKILLED_IN] -> (:skill), (:user) -[:PARTICIPATED_IN]-> (:event), (:user) -[:FOLLOWS] -> (:channel), (:user) -[:FOLLOWING] -> (:user)
 
-//Create groups
-CREATE (g:group{group_name:"ACS-Winter2018_Group_1",group_start_date:  date("2019-10-01") });
-CREATE (g:group{group_name:"ACS-Winter2018_Group_2",group_start_date: date("2019-10-01") });
-CREATE (g:group{group_name:"ACS-Summer2019_Group_1",group_start_date: date("2019-04-01") });
 
-//Create modules
-CREATE (m:module{module_name:"IPM", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") ,appointments:["2018-10-02 9:00_to_12:00","2018-10-03 9:00_to_12:00"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
-CREATE (m:module{module_name:"SAD", start_date: date("2018-11-01")  ,end_date: date("2018-11-30"),appointments:["2018-11-03 14:00_to_17:00","2018-11-05 9:00_to_12:00"], lecturers:["Prof.Christoph Hahn"]});
-CREATE (m:module{module_name:"SDP", start_date: date("2018-11-01")  ,end_date: date("2019-11-30"),appointments:["2018-11-01 9:00_to_12:00","2018-11-06 9:00_to_12:00"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
-CREATE (m:module{module_name:"SAP Technology", start_date: date("2018-12-01")  ,end_date: date("2018-12-31"),appointments:["2018-12-10 9:00_to_12:00","2018-12-11 9:00_to_12:00"], lecturers:["Prof.Joachim Brauch"]});
-CREATE (m:module{module_name:"ACS", start_date: date("2018-12-01") ,end_date: date("2018-12-31"),appointments:["2018-12-02 9:00_to_12:00","2018-12-03 9:00_to_12:00"], lecturers:["Prof.Dr.Mohammed Yass"]});
-CREATE (m:module{module_name:"IPM", start_date: date("2019-04-01")  ,end_date: date("2019-04-30") ,appointments:["2019-04-01 9:00_to_17:00"], lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
-CREATE (m:module{module_name:"SDP", start_date:date("2019-05-01") ,end_date:date("2019-05-31"),appointments:["2019-05-06 9:00_to_12:00"], lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
+create (u:user:student {user_name:'akansha',first_name:'Akansha', last_name:'Pandey'});
+create (u:user:student {user_name:'viraj',first_name:'Viraj', last_name:'Patel'});
+create (u:user:alumni {user_name:'ashish',first_name:'Ashish', last_name:'C'});
+CREATE (u:user:student {user_name:"sanket",first_name:"Sanket", last_name:'Warambhe'});
+CREATE (u:user:student{user_name:"vaibhav",first_name:"Vaibhav", last_name:'Singh'});
+CREATE (u:user:student{user_name:"sarang",first_name:"Sarang", last_name:'Samarth'});
+CREATE (u:user:student{user_name:"rahul",first_name:"Rahul" , last_name:'Sonawane'});
+CREATE (u:user:student{user_name:"akshay",first_name:"Akshay", last_name:'Gavandi'});
 
-//Create skills
-CREATE (s:skill{skill_name:"JAVA"});
-CREATE (s:skill{skill_name:"C++"});
-CREATE (s:skill{skill_name:"MySQL"});
-CREATE (s:skill{skill_name:"C#"});
-CREATE (s:skill{skill_name:"C"});
-CREATE (s:skill{skill_name:"Neo4j"});
-CREATE (s:skill{skill_name:"HTML/CSS"});
-CREATE (s:skill{skill_name:"MongoDB"}); 
-CREATE (s:skill{skill_name:"Python"});
+//Create Degree Relationshipe: (:degree) -[:DEGREE_OF]-> (:program)
+CREATE (d:degree {degree_name:'Masters of Science', degree_type:'Research'});
+CREATE (d:degree {degree_name:'Masters of Applied Science', degree_type:'Professional'});
+CREATE (d:degree {degree_name:'Bachelors of Science', degree_type:'Research'});
+CREATE (d:degree {degree_name:'Bachelors of Arts', degree_type:'Professional'});
+
+//Create Program
+CREATE (p:program {program_name: 'Applied Computer Science', credits: 120, head_of_department: 'Prof. Dr. Moeckel', duration: '24 months', program_type: 'full-time'});
+CREATE (p:program {program_name: 'Big Data', credits: 80, head_of_department: 'Prof. Dr. Moeckel', duration: '18 months', program_type: 'part-time'});
+CREATE (p:program {program_name: 'Big Data', credits: 120, head_of_department: 'Prof. Dr. Moeckel', duration: '24 months', program_type: 'full-time'});
+
+
+//Create batches Relationship: (:batch) -[:IS_BATCH_OF] -> (:program) 
+CREATE (b:batch{batch_name:"ACS-Winter2018",batch_start_date:  date("2019-10-01"), group_name:'Group 1'});
+CREATE (b:batch{batch_name:"ACS-Winter2018",batch_start_date:  date("2019-10-01"), group_name:'Group 2'});
+CREATE (b:batch{batch_name:"ACS-Summer2019",batch_start_date: date("2019-04-01")});
+
+//Create modules Relationship : (:module)-[:PART_OF]-> (:batch)
+CREATE (m:module{module_name:"IPM", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") , lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
+CREATE (m:module{module_name:"SAD", start_date: date("2018-11-01")  ,end_date: date("2018-11-30") , lecturers:["Prof.Christoph Hahn"]});
+CREATE (m:module{module_name:"SDP", start_date: date("2018-11-01")  ,end_date: date("2019-11-30") , lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
+CREATE (m:module{module_name:"SAP Technology", start_date: date("2018-12-01")  ,end_date: date("2018-12-31"), lecturers:["Prof.Joachim Brauch"]});
+CREATE (m:module{module_name:"ACS", start_date: date("2018-12-01") ,end_date: date("2018-12-31"), lecturers:["Prof.Dr.Mohammed Yass"]});
+CREATE (m:module{module_name:"IPM", start_date: date("2019-04-01")  ,end_date: date("2019-04-30"), lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
+CREATE (m:module{module_name:"SDP", start_date:date("2019-05-01") ,end_date:date("2019-05-31"), lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
+
+//Create skills  
+CREATE (s:skill:programming {skill_name:"JAVA"});
+CREATE (s:skill:programming {skill_name:"C++"});
+CREATE (s:skill:programming {skill_name:"MySQL"});
+CREATE (s:skill:programming {skill_name:"C#"});
+CREATE (s:skill:programming {skill_name:"C"});
+CREATE (s:skill:programming {skill_name:"Neo4j"});
+CREATE (s:skill:programming {skill_name:"HTML/CSS"});
+CREATE (s:skill:programming {skill_name:"MongoDB"}); 
+CREATE (s:skill:programming {skill_name:"Python"});
+CREATE (s:skill:finance {skill_name:"Tally"});
+CREATE (s:skill:marketing {skill_name:"Tableu"});
 
 //Create events
-create (e:event {event_id:'1',event_name:'Campus Rally',category:'orientation',location:'SRH University Campus', event_date:date('2019-04-01'), tags:['Campus tour', 'orientation']});
-create (e:event {event_id:'2',event_name:'SAP Guest Lecture',category:'guest lecture',location:'Blue Tower, ARC 201', event_date:date('2019-03-20'), tags:['Cloud Computing', 'SAP Technologies', 'Business Computing']});
-create (e:event {event_id:'3',event_name:'Job Fair',category:'workshop',location:'SRH University Campus', event_date:date('2019-04-10'), tags:['Job', 'Resume', 'Job Interview']});
-create (e:event {event_id:'4',event_name:'hackathon',category:'competition',location:'SRH University Arc 001', event_date:date('2019-04-01'), tags:['programming', 'innovation', 'hackathon']});
-create (e:event {event_id:'5',event_name:'Introduction to design thinking techniques',category:'lecture',location:'SRH University T025', event_date:date('2019-04-15'), tags:['Design Thinking', 'Problem Solving', 'User Stories']});
+create (e:event:campus_tour:orientation {event_id:'1',event_name:'Campus Rally',event_description:'This is about student orientation for campus.',category:'orientation',location:'SRH University Campus', event_date:date('2019-04-01')});
+create (e:event:cloud_computing:business_computing {event_id:'2',event_name:'SAP Guest Lecture',event_description: 'This is about SAP Technologies',category:'guest lecture',location:'Blue Tower, ARC 201', event_date:date('2019-03-20')});
+create (e:event:job:job_interview {event_id:'3',event_name:'Job Fair',event_description: 'This is about new job opportunities.',category:'workshop',location:'SRH University Campus', event_date:date('2019-04-10')});
+create (e:event:programming:innovation:hackathon {event_id:'4',event_name:'hackathon',event_description: 'This is about Programming challenges.',category:'competition',location:'SRH University Arc 001', event_date:date('2019-04-01')});
+create (e:event:design_thinking:problem_solving {event_id:'5',event_name:'Design thinking techniques',event_description: 'Introducing the design thinking techniques.',category:'lecture',location:'SRH University T025', event_date:date('2019-04-15')});
 
 //Create channels
-create (c:channel {channel_id: '1', channel_name:'Introduction to Machine Learning', category: 'Technology', tags: ['Computer Science', 'Machine Learning','Classification algorithm', 'Regression algorithm', 'Python'], creation_date: date('2019-02-01')});
-create (c:channel {channel_id: '2', channel_name:'ACS Oct 2018 Discussion Forum', category: 'Group', tags: ['ACS', 'October','2018', 'Student Group'], creation_date: date('2018-09-01')});
-create (c:channel {channel_id: '3', channel_name:'Introduction to Mainframe technologies', category: 'Technology', tags: ['Computer Science', 'Mainframe','Banking Sector', 'COBOL'], creation_date: date('2019-01-01')});
+create (c:channel:machine_learning:computer_science {channel_id: '1', channel_name:'Machine Learning', category: 'Technology', creation_date: date('2019-02-01')});
+create (c:channel:acs:student_group {channel_id: '2', channel_name:'ACS Oct 2018 Discussion Forum', category: 'Group', creation_date: date('2018-09-01')});
+create (c:channel:computer_science:mainframe {channel_id: '3', channel_name:'Mainframe technologies', category: 'Technology', creation_date: date('2019-01-01')});
 
 //Create following relationship
 match(a:user {user_name:'akansha'}), (v:user {user_name:'viraj'})
@@ -149,23 +166,29 @@ create (u) -[:FOLLOWS {since:date('2019-02-06'), is_owner: false, is_moderator: 
 
 //Create new posts
 match (u:user {user_name:'ashish'}) -[:FOLLOWS]-> (c:channel {channel_id:'1'})
-create (u) -[:CREATED {date:date('2019-02-08')}]-> (p:post {data:'Hello I found interesting dataset for image recognition...', tags:['image recognition', 'python', 'opencv']}) -[:ON {view:'public'}]-> (c);
+create (u) -[:CREATED_POST {date:date('2019-02-08')}]-> (p:post {data:'Hello I found interesting dataset for image recognition...', tags:['image recognition', 'python', 'opencv']}) -[:POSTED_ON {view:'public'}]-> (c);
 
 match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_id:'1'})
-create (u) -[:CREATED {date:date('2019-02-09')}]-> (p:post {data:'Hello All, Let us all meet to discuss on interesting findings on regression algorithm', tags:['machine learning', 'python', 'regression']}) -[:ON {view:'private'}]-> (c);
+create (u) -[:CREATED_POST {date:date('2019-02-09')}]-> (p:post {data:'Hello All, Let us all meet to discuss on interesting findings on regression algorithm', tags:['machine learning', 'python', 'regression']}) -[:POSTED_ON {view:'private'}]-> (c);
 
 match (u:user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_id:'2'})
-create (u) -[:CREATED {date:date('2019-01-03')}]-> (p:post {data:'Hello All, BBQ Party is on this Friday. Do join. :)', tags:['party', 'celebration']}) -[:ON {view:'private'}]-> (c);
+create (u) -[:CREATED_POST {date:date('2019-01-03')}]-> (p:post {data:'Hello All, BBQ Party is on this Friday. Do join. :)', tags:['party', 'celebration']}) -[:POSTED_ON {view:'private'}]-> (c);
 
 match (u:user {user_name:'akansha'}) -[:FOLLOWS]-> (c:channel {channel_id:'2'})
-create (u) -[:CREATED {date:date('2019-10-15')}]-> (p:post {data:'Hello All, Meet up for all ACS students to discuss about course.', tags:['ACS', 'course']}) -[:ON {view:'public'}]-> (c);
+create (u) -[:CREATED_POST {date:date('2019-10-15')}]-> (p:post {data:'Hello All, Meet up for all ACS students to discuss about course.', tags:['ACS', 'course']}) -[:POSTED_ON {view:'public'}]-> (c);
 
+//Create comments on post
+match (u: user {user_name:'viraj'}) -[:FOLLOWS]-> (c:channel {channel_id:'1'})
+create (u) -[:COMMENTED_ON {comment:"This model lacks some improvements..." , date: date('2019-03-04T12:03:26')}];
 
 //Create relationship for skills
 MATCH (u : user{user_name : "rahul"}), (s : skill{skill_name : "JAVA"})  
 CREATE (u) - [r : SKILLED_IN] -> (s);
 
 MATCH (u : user{user_name : "rahul"}), (s : skill{skill_name : "MySQL"}) 
+CREATE (u) - [r : SKILLED_IN] -> (s);
+
+MATCH (u : user{user_name : "akansha"}), (s : skill{skill_name : "MySQL"}) 
 CREATE (u) - [r : SKILLED_IN] -> (s);
 
 MATCH (u : user{user_name : "rahul"}), (s : skill{skill_name : "HTML/CSS"}) 
@@ -212,24 +235,24 @@ CREATE (u) - [r : RECOMMENDATION_COMMENT {comment:"You not only granted me an op
 MATCH (u : user{user_name : "rahul"})-[:FOLLOWING]-> (v : user{user_name : "sanket"}) 
 CREATE (u) - [r : RECOMMENDATION_COMMENT {comment:" You are good programmer", date: date("2019-05-02") }] -> (v);
 
-//Create relationship to become member or belongs to group
-MATCH (u : user{user_name : "rahul"}), (g : group{group_name : "ACS-Winter2018_Group_1"}) 
-CREATE (u) - [r : BELONGS_TO] -> (g);
+//Create relationship to become member or belongs to batch
+MATCH (u : user{user_name : "rahul"}), (b : batch {batch_name : "ACS-Winter2018", group_name:"Group 1"}) 
+CREATE (u) - [r : BELONGS_TO] -> (b);
 
-MATCH (u : user{user_name : "viraj"}), (g : group{group_name : "ACS-Winter2018_Group_1"})
-CREATE (u) - [r : BELONGS_TO] -> (g);
+MATCH (u : user{user_name : "viraj"}), (b : batch {batch_name : "ACS-Winter2018", group_name:"Group 1"})
+CREATE (u) - [r : BELONGS_TO] -> (b);
 
-MATCH (u : user{user_name : "sanket"}), (g : group{group_name : "ACS-Winter2018_Group_1"}) 
-CREATE (u) - [r : BELONGS_TO] -> (g);
+MATCH (u : user{user_name : "sanket"}), (b : batch {batch_name : "ACS-Winter2018", group_name:"Group 1"}) 
+CREATE (u) - [r : BELONGS_TO] -> (b);
 
-MATCH (u : user{user_name : "vaibhav"}), (g : group{group_name : "ACS-Winter2018_Group_2"}) 
-CREATE (u) - [r : BELONGS_TO] -> (g);
+MATCH (u : user{user_name : "vaibhav"}), (b : batch {batch_name : "ACS-Winter2018", group_name:"Group 2"}) 
+CREATE (u) - [r : BELONGS_TO] -> (b);
 
-MATCH (u : user{user_name : "sarang"}), (g : group{group_name : "ACS-Winter2018_Group_2"}) 
-CREATE (u) - [r : BELONGS_TO] -> (g);
+MATCH (u : user{user_name : "sarang"}), (b : batch {batch_name : "ACS-Winter2018", group_name:"Group 2"}) 
+CREATE (u) - [r : BELONGS_TO] -> (b);
 
-MATCH (u : user{user_name : "akshay"}), (g : group{group_name : "ACS-Summer2019_Group_1"}) 
-CREATE (u) - [r : BELONGS_TO] -> (g);
+MATCH (u : user{user_name : "akshay"}), (b : batch {batch_name : "ACS-Summer2019"}) 
+CREATE (u) - [r : BELONGS_TO] -> (b);
 
 
 //Create relationship for enrolling in module
@@ -285,8 +308,8 @@ MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"SAP Technology
 CREATE (u) - [r : ENROLLED_TO] -> (m);
 
 //Create relationship for endoring user skills
-match(a:user{ user_name:"akansha"}) -[:FOLLOWING]->(v:user{ user_name:"viraj"})
-create (a) - [en:ENDORSED {topic: "Java", rating: 4.5} ] -> (v);
+match(a:user{ user_name:"akansha"}) -[:FOLLOWING]->(v:user{ user_name:"viraj"}) -[:SKILLED_IN {skill_name : "C#"}] -> (s:skill)
+create (a) - [en:ENDORSED {topic: "C#", rating: 4.5} ] -> (v);
 
-match(v:user{ user_name:"viraj"}) -[:FOLLOWING]-> (a:user{ user_name:"akansha"})
-create (v) - [en:ENDORSED {topic: "PhP" , rating: 3.7} ] -> (a);
+match(v:user{ user_name:"viraj"}) -[:FOLLOWING]-> (a:user{ user_name:"akansha"}) -[:SKILLED_IN {skill_name : "MySQL"}] -> (s:skill)
+create (v) - [en:ENDORSED {topic: "MySQL" , rating: 3.7} ] -> (a);
