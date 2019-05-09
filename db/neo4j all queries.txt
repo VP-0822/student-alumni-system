@@ -179,7 +179,7 @@ create (u) -[:CREATED_POST {date:datetime('2019-10-15T17:03:26.000+0100')}]-> (p
 
 //Create comments on post
 match (u: user {user_name:'akansha'}) -[:FOLLOWS]-> (c:channel {channel_id:'2'})
-create (u) -[:COMMENTED_ON {comment:"This ..." , date: DATETIME("2019-03-04T12:03:26.000+0100")}]->(c)
+create (u) -[:COMMENTED_ON {comment:"This ..." , date: DATETIME("2019-03-04T12:03:26.000+0100")}]->(c);
 
 //Create relationship for skills
 MATCH (u : user{user_name : "rahul"}), (s : skill{skill_name : "JAVA"})  
