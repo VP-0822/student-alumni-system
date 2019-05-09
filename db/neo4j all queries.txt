@@ -29,13 +29,13 @@ CREATE (b:batch{batch_name:"ACS-Winter2018",batch_start_date:  date("2019-10-01"
 CREATE (b:batch{batch_name:"ACS-Summer2019",batch_start_date: date("2019-04-01")});
 
 //Create modules Relationship : (:module)-[:PART_OF]-> (:batch)
-CREATE (m:module{module_name:"IPM", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") , lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
-CREATE (m:module{module_name:"SAD", start_date: date("2018-11-01")  ,end_date: date("2018-11-30") , lecturers:["Prof.Christoph Hahn"]});
-CREATE (m:module{module_name:"SDP", start_date: date("2018-11-01")  ,end_date: date("2019-11-30") , lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
-CREATE (m:module{module_name:"SAP Technology", start_date: date("2018-12-01")  ,end_date: date("2018-12-31"), lecturers:["Prof.Joachim Brauch"]});
-CREATE (m:module{module_name:"ACS", start_date: date("2018-12-01") ,end_date: date("2018-12-31"), lecturers:["Prof.Dr.Mohammed Yass"]});
-CREATE (m:module{module_name:"IPM", start_date: date("2019-04-01")  ,end_date: date("2019-04-30"), lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
-CREATE (m:module{module_name:"SDP", start_date:date("2019-05-01") ,end_date:date("2019-05-31"), lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
+CREATE (m:module{module_name:"IPM",module_id:"1", start_date: date("2018-10-01")  ,end_date: date("2018-10-31") , lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
+CREATE (m:module{module_name:"SAD",module_id:"2", start_date: date("2018-11-01")  ,end_date: date("2018-11-30") , lecturers:["Prof.Christoph Hahn"]});
+CREATE (m:module{module_name:"SDP",module_id:"3", start_date: date("2018-11-01")  ,end_date: date("2019-11-30") , lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
+CREATE (m:module{module_name:"SAP Technology", module_id:"4",start_date: date("2018-12-01")  ,end_date: date("2018-12-31"), lecturers:["Prof.Joachim Brauch"]});
+CREATE (m:module{module_name:"ACS",module_id:"4", start_date: date("2018-12-01") ,end_date: date("2018-12-31"), lecturers:["Prof.Dr.Mohammed Yass"]});
+CREATE (m:module{module_name:"IPM", module_id:"5",start_date: date("2019-04-01")  ,end_date: date("2019-04-30"), lecturers:["Prof.Dr.Gerd Moeckel","Prof.Josef Hermanns"]});
+CREATE (m:module{module_name:"SDP", module_id:"6", start_date:date("2019-05-01") ,end_date:date("2019-05-31"), lecturers:["Prof.Dr.Ajinkya Prabhune","Dr.Peter Misch"]});
 
 //Create skills  
 CREATE (s:skill:programming {skill_name:"JAVA"});
