@@ -1,12 +1,12 @@
 ADDING DATA TO VIEW HISTORY:
 
-ZINCRBY sanket 1 "User 1"
-ZINCRBY sanket 1 "User 2"
-ZINCRBY sanket 1 "User 3"
+ZINCRBY sanket 1 "viraj"
+ZINCRBY sanket 1 "sarang"
+ZINCRBY sanket 1 "hamza"
 
-ZINCRBY sarang 1 "User 1"
-ZINCRBY sarang 1 "User 2"
-ZINCRBY sarang 1 "User 3"
+ZINCRBY sarang 1 "sanket"
+ZINCRBY sarang 1 "akansha"
+ZINCRBY sarang 1 "vaibhav"
 
 
 GETTING VIEWER HISTORY RESULT
