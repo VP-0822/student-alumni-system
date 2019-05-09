@@ -315,5 +315,5 @@ match(v:user{ user_name:"viraj"}) -[:FOLLOWING]-> (a:user{ user_name:"akansha"})
 create (v) - [en:ENDORSED {topic: "MySQL" , rating: 3.7} ] -> (a);
 
 Create a relationship between user and degree user -[:STUDENT_OF] - > degree
-MATCH (u : program{program_name : "Applied Computer Science"}), (m : user{user_name :"rahul"}) 
+MATCH (u : program{program_name : "Applied Computer Science"}), (m : user{user_name :"akansha"}) 
 CREATE (m) - [r :STUDENT_OF] -> (u);
