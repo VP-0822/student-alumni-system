@@ -1,0 +1,174 @@
+db.createCollection("userGrades");
+
+db.userGrades.insertMany(
+[
+  {
+    "userName": "sarang",
+    "scores": [
+      {
+        "moduleName": "Advance Computer Science",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5.0
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "moduleName": "International Project Management",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 1.5
+          }
+        ]
+      }
+    ]
+  },{
+    "userName": "rahul",
+    "scores": [
+      {
+        "moduleName": "Advance Computer Science",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5.0
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 2.0
+          }
+        ]
+      },
+      {
+        "moduleName": "International Project Management",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 1.5
+          }
+        ]
+      }
+    ]
+  },{
+    "userName": "vaibhav",
+    "scores": [
+      {
+        "moduleName": "Advance Computer Science",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "moduleName": "International Project Management",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5.0
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 1.5
+          }
+        ]
+      }
+    ]
+  },
+{
+    "userName": "sanket",
+    "scores": [
+      {
+        "moduleName": "Advance Computer Science",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 1.3
+          }
+        ]
+      },
+      {
+        "moduleName": "International Project Management",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 1.5
+          }
+               ]
+              },
+          {
+            "moduleName": "Software Architecture Development",
+            "attempts": [
+              {
+                "attemptNo": 1,
+                "date":" 2019/5/20",
+                "score": 1.7
+              }
+            ]
+          }
+        ]
+      
+         }    
+  ,{
+  "userName": "viraj",
+  "scores": [
+    {
+      "moduleName": "Advance Computer Science",
+      "attempts": [
+        {
+          "attemptNo": 1,
+          "date": "2019/5/20",
+          "score": 5.0
+        },
+        {
+          "attemptNo": 2,
+          "date": "2019/6/20",
+          "score": 2.5
+        }
+      ]
+    },
+    {
+      "moduleName": "Service Engineering Management",
+      "attempts": [
+        {
+          "attemptNo": 1,
+          "date": "2019/5/20",
+          "score": 1.5
+        }
+      ]
+    }
+  ]
+}
+])
