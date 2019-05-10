@@ -77,182 +77,181 @@ db.userAccountDetails.insert({
 								"accountStatus":1
 								}
 							);
-	[  
-   {  
-      "userName":"sarang",
-      "scores":[  
-         {  
-            "moduleName":"AdvanceComputerScience",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":5.0
-               },
-               {  
-                  "attemptNo":2,
-                  "date":"2019/6/20",
-                  "score":1.0
-               }
+	[
+  {
+    "userName": "sarang",
+    "scores": [
+      {
+        "moduleName": "Advance Computer Science",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5.0
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "moduleName": "International Project Management",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 1.5
+          }
+        ]
+      }
+    ]
+  },{
+    "userName": "rahul",
+    "scores": [
+      {
+        "moduleName": "Advance Computer Science",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5.0
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 2.0
+          }
+        ]
+      },
+      {
+        "moduleName": "International Project Management",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 1.5
+          }
+        ]
+      }
+    ]
+  },{
+    "userName": "vaibhav",
+    "scores": [
+      {
+        "moduleName": "Advance Computer Science",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "moduleName": "International Project Management",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5.0
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 1.5
+          }
+        ]
+      }
+    ]
+  },
+{
+    "userName": "sanket",
+    "scores": [
+      {
+        "moduleName": "Advance Computer Science",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 1.3
+          }
+        ]
+      },
+      {
+        "moduleName": "International Project Management",
+        "attempts": [
+          {
+            "attemptNo": 1,
+            "date": "2019/5/20",
+            "score": 5
+          },
+          {
+            "attemptNo": 2,
+            "date": "2019/6/20",
+            "score": 1.5
+          }
+               ]
+              },
+          {
+            "moduleName": "Software Architecture Development",
+            "attempts": [
+              {
+                "attemptNo": 1,
+                "date":" 2019/5/20",
+                "score": 1.7
+              }
             ]
-         },
-         {  
-            "moduleName":"InternationalProjectManagement",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":1.5
-               }
-            ]
-         }
+          }
+        ]
+      
+         }    
+  ,{
+  "userName": "viraj",
+  "scores": [
+    {
+      "moduleName": "Advance Computer Science",
+      "attempts": [
+        {
+          "attemptNo": 1,
+          "date": "2019/5/20",
+          "score": 5.0
+        },
+        {
+          "attemptNo": 2,
+          "date": "2019/6/20",
+          "score": 2.5
+        }
       ]
-   },
-   {  
-      "userName":"rahul",
-      "scores":[  
-         {  
-            "moduleName":"AdvanceComputerScience",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":5.0
-               },
-               {  
-                  "attemptNo":2,
-                  "date":"2019/6/20",
-                  "score":2.0
-               }
-            ]
-         },
-         {  
-            "moduleName":"InternationalProjectManagement",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":1.5
-               }
-            ]
-         }
+    },
+    {
+      "moduleName": "Service Engineering Management",
+      "attempts": [
+        {
+          "attemptNo": 1,
+          "date": "2019/5/20",
+          "score": 1.5
+        }
       ]
-   },
-   {  
-      "userName":"vaibhav",
-      "scores":[  
-         {  
-            "moduleName":"AdvanceComputerScience",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":5
-               },
-               {  
-                  "attemptNo":2,
-                  "date":"2019/6/20",
-                  "score":2
-               }
-            ]
-         },
-         {  
-            "moduleName":"InternationalProjectManagement",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":5.0
-               },
-               {  
-                  "attemptNo":2,
-                  "date":"2019/6/20",
-                  "score":1.5
-               }
-            ]
-         }
-      ]
-   },
-   {  
-      "userName":"sanket",
-      "scores":[  
-         {  
-            "moduleName":"AdvanceComputerScience",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":5
-               },
-               {  
-                  "attemptNo":2,
-                  "date":"2019/6/20",
-                  "score":1.3
-               }
-            ]
-         },
-         {  
-            "moduleName":"InternationalProjectManagement",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":5
-               },
-               {  
-                  "attemptNo":2,
-                  "date":"2019/6/20",
-                  "score":1.5
-               }
-            ]
-         },
-         {  
-            "moduleName":"SoftwareArchitectureDevelopment",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":" 2019/5/20",
-                  "score":1.7
-               }
-            ]
-         }
-      ]
-   },
-   {  
-      "userName":"viraj",
-      "scores":[  
-         {  
-            "moduleName":"AdvanceComputerScience",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":5.0
-               },
-               {  
-                  "attemptNo":2,
-                  "date":"2019/6/20",
-                  "score":2.5
-               }
-            ]
-         },
-         {  
-            "moduleName":"ServiceEngineeringManagement",
-            "attempts":[  
-               {  
-                  "attemptNo":1,
-                  "date":"2019/5/20",
-                  "score":1.5
-               }
-            ]
-         }
-      ]
-   }
+    }
+  ]
+}
 ]
 
 
 {
-  "moduleName":"AdvanceComputerScience",
+  "moduleName":"Advance Computer Science",
   "moduleDescription":"Project in c#",
   "moduleProgram":"Masters",
     "noOfCredits": 8
@@ -260,7 +259,7 @@ db.userAccountDetails.insert({
 
 
 {
-  "moduleName":"InternationalProjectManagement",
+  "moduleName":"International Project Management",
   "moduleDescription":"Study of different management ",
   "moduleProgram":"Masters",
     "noOfCredits": 8
@@ -268,7 +267,7 @@ db.userAccountDetails.insert({
 
 
 {
-  "moduleName":"SoftwareArchitectureDevelopment",
+  "moduleName":"Software Architecture Development",
   "moduleDescription":"Development of a server side application",
   "moduleProgram":"Masters",
     "noOfCredits": 8
@@ -276,11 +275,14 @@ db.userAccountDetails.insert({
 
 
 {
-  "moduleName":"ServiceEngineeringManagement",
+  "moduleName":"Service Engineering Management",
   "moduleDescription":"Learning about businesses based on services.",
   "moduleProgram":"Masters",
     "noOfCredits": 8
 }
+
+
+
 
 
 
