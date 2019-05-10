@@ -1,5 +1,3 @@
-db.createCollection("userMessages");
-
 db.userProfileDetails.insert({
 	"userName" : "vaibhav",
 	"firstName" : "vaibhav",
@@ -77,3 +75,8 @@ db.userAccountDetails.insert({
 								"accountStatus":1
 								}
 							)
+db.createCollection("userMessages");
+db.userMessages.insertMany([{ "senderUserName" : "viraj", "recipientUserName" : "akansha", "message" : "Hey Hi!", "messageDigest" : "23aersd23343bdh", "sendDateTime" : ISODate("2019-05-01T09:16:56.108Z"), "deliveredDateTime" : ISODate("2019-05-01T09:16:56.108Z"), "readDatetime" : ISODate("2019-05-01T09:16:56.108Z") },
+{ "senderUserName" : "akansha","recipientUserName" : "viraj", "message" : "Are you working on Information system project", "messageDigest" : "24545aertyuyrsd23343bdh", "sendDateTime" : ISODate("2019-05-01T09:18:09.220Z"), "deliveredDateTime" : ISODate("2019-05-01T09:18:09.220Z"), "readDatetime" : ISODate("2019-05-01T09:18:09.220Z") },
+{ "senderUserName" : "akansha","recipientUserName" : "vaibhav", "message" : "Let's meet tomorrow", "messageDigest" : "8554445aertyuyrsd23343bdh", "sendDateTime" : ISODate("2019-05-01T10:08:22.527Z"), "deliveredDateTime" : ISODate("2019-05-01T10:08:22.527Z"), "readDatetime" : ISODate("2019-05-01T10:08:22.527Z") },
+{ "senderUserName" : "viraj", "recipientUserName" : "akansha", "message" : "Yes, I will create merge request now.", "messageDigest" : "85erwer54445aertyuyrsd23343bdh", "sendDateTime" : ISODate("2019-05-03T18:28:29.926Z"), "deliveredDateTime" : ISODate("2019-05-03T18:28:29.992Z"), "readDatetime" : ISODate("2019-05-03T18:28:29.992Z") }]);
