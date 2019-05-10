@@ -1,0 +1,35 @@
+    
+//ADDING DATA TO VIEW HISTORY:
+
+ZINCRBY sanket 1 "sarang"
+ZINCRBY sanket 1 "viraj"
+ZINCRBY sanket 1 "hamza"
+
+ZINCRBY sarang 1 "akansha"
+ZINCRBY sarang 1 "vaibhav"
+ZINCRBY sarang 1 "rahul"
+
+
+//GETTING VIEWER HISTORY RESULT
+
+ZREVRANGE sanket 0 -1
+ZREVRANGE sarang 0 -1
+
+
+//Create Redis sorted set based on event tags for users
+ZINCRBY eventtags:akansha 1 "Machine Learning"
+ZINCRBY eventtags:akansha 1 "Algorithm"
+ZINCRBY eventtags:akansha 1 "Project Management"
+ZINCRBY eventtags:akansha 1 "Machine Learning"
+
+//Select users specific for tag which will be used for user recommendation
+
+ZREVRANGE eventtags:akansha 0 -1
+
+//CREATE sorted set 
+ZINCRBY machine_learning:classification 1 "ashish"
+ZINCRBY machine_learning:regression 1 "ashish"
+ZINCRBY machine_learning:pandas 1 "ashish"
+ZINCRBY machine_learning:algorithm 1 "ashish"
+
+//ZREVRANGE machinelearning:regression 0 -1
