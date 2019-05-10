@@ -77,3 +77,10 @@ db.userAccountDetails.insert({
 							);
 
 
+db.userAccountDetails.insert({
+								"userName":"vaibhav",
+								"emailId" :"vaibhav@gmail.com",
+								"passwordHash": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+								"passwordChangeDateTime":new Date()
+								}
+							)
