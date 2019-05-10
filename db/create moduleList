@@ -1,0 +1,35 @@
+
+db.moduleList.insertMany(
+[
+{
+  "moduleName":"Advance Computer Science",
+  "moduleDescription":"Project in c#",
+  "moduleProgram":"Masters",
+    "noOfCredits": 8
+},
+
+
+{
+  "moduleName":"International Project Management",
+  "moduleDescription":"Study of different management ",
+  "moduleProgram":"Masters",
+    "noOfCredits": 8
+},
+
+
+{
+  "moduleName":"Software Architecture Development",
+  "moduleDescription":"Development of a server side application",
+  "moduleProgram":"Masters",
+    "noOfCredits": 8
+},
+
+
+{
+  "moduleName":"Service Engineering Management",
+  "moduleDescription":"Learning about businesses based on services.",
+  "moduleProgram":"Masters",
+    "noOfCredits": 8
+}
+])
+
