@@ -6,7 +6,8 @@ db.userProfileDetails.insert({
 	"lastName" : "singh",
 	"dateOfBirth" : new Date("1993-12-19"),
 	"gender" : "male",
-	"photo" : "",
+	"photo" : new BinData(0,"AQAAAAEBAAVlbl9VSwAAAAAAAAhv"),
+	"nationality":"Indian"
 	"addresses" : [{
 					"line1" : "ringstrasse 41",
 					"line2" : "Wg5",
