@@ -308,10 +308,10 @@ MATCH (u : user{user_name : "sarang"}), (m : module{module_name :"SAP Technology
 CREATE (u) - [r : ENROLLED_TO] -> (m);
 
 //Create relationship for endoring user skills
-match(a:user{ user_name:"akansha"}) -[:FOLLOWING]->(v:user{ user_name:"viraj"}) -[:SKILLED_IN {skill_name : "C#"}] -> (s:skill)
+match(a:user{ user_name:"akansha"}) -[:FOLLOWING]->(v:user{ user_name:"viraj"}) -[:SKILLED_IN] -> (s:skill {skill_name : "C#"})
 create (a) - [en:ENDORSED {topic: "C#", rating: 4.5, date: datetime("2019-05-02T23:32:26.000+0100")} ] -> (v);
 
-match(v:user{ user_name:"viraj"}) -[:FOLLOWING]-> (a:user{ user_name:"akansha"}) -[:SKILLED_IN {skill_name : "MySQL"}] -> (s:skill)
+match(v:user{ user_name:"viraj"}) -[:FOLLOWING]-> (a:user{ user_name:"akansha"}) -[:SKILLED_IN] -> (s:skill {skill_name : "MySQL"})
 create (v) - [en:ENDORSED {topic: "MySQL" , rating: 3.7, date: datetime("2019-05-02T23:33:26.000+0100")} ] -> (a);
 
 
