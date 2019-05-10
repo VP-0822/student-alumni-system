@@ -1,4 +1,4 @@
-
+db.createCollection("moduleList");
 db.moduleList.insertMany(
 [
 {
@@ -27,7 +27,7 @@ db.moduleList.insertMany(
 
 {
   "moduleName":"Service Engineering Management",
-  "moduleDescription":"Learning about businesses based on services.",
+  "moduleDescription":"Learning about businesses based on services",
   "moduleProgram":"Masters",
     "noOfCredits": 8
 }
