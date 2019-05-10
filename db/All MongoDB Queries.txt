@@ -1,1 +1,79 @@
 db.createCollection("userMessages");
+
+db.userProfileDetails.insert({
+	"userName" : "vaibhav",
+	"firstName" : "vaibhav",
+	"lastName" : "singh",
+	"dateOfBirth" : new Date("1993-12-19"),
+	"gender" : "male",
+	"photo" : "",
+	"addresses" : [{
+					"line1" : "ringstrasse 41",
+					"line2" : "Wg5",
+					"city" : "Heidelberg",
+					"pincode" : "69115"
+				}],			
+	"mobileNumber" : "123456789",
+	"maritalStatus" : "single",
+	"enrolledProgram" : "Applied Computer Science",
+	"userType" : "student",
+	"programJoinDate" : new Date("2018-10-01"),
+	"graduationDate" : new Date("2020-01-01"),
+	"previousEducationBackground" : [{
+											"degreeTitle" : "M.Sc",
+											"organisationName" : "SRH",
+											"startDate" : new Date("2018-01-01"),
+											"endDate" : new Date("2020-01-01"),
+											"degreeType" : "full time",
+											"degreeSpecification" : "Computer Science",
+											"overallGrade" : 2.0,
+											"degreeDocumentFile" : ""	
+										}],
+	"workExperience" : [{
+								"jobTitle" : "TeamLead",
+								"isCurrentJob" : 1,
+								"jobType" : "Full time",
+								"jobDescription" : "software team lead",
+								"startDate" : "2019-01-01",
+								"endDate" : "2019-06-01",
+								"organizationName" : "SAP",
+								"location" : "Heidelberg",
+								"jobTags" : ["software","management"]
+							},
+                                                                 {
+								"jobTitle" : "ResearchAnalyst",
+								"isCurrentJob" : 1,
+								"jobType" : "Full time",
+								"jobDescription" : "head of the research team",
+								"startDate" : "2020-01-01",
+								"endDate" : "2020-07-01",
+								"organizationName" : "Samsung",
+								"location" : "Heidelberg",
+								"jobTags" : ["reseacrch"]
+							}
+                                                                                                                       ],
+						
+	"projectWork" : [	{
+							"moduleName" : "Advance Information System",
+							"title" : "Student Profile and Alumini System",
+							"description" : "Data model for Student profile",
+							"type" : "course work",
+							"startDate" : new Date("2019-01-01"),
+							"endDate" : new Date("2019-01-01"),
+							"members" : ["sarang", "viraj", "sanket", "rahul"],
+							"referenceUrls" : [""],
+							"documentFile":"",
+							"documentTags" : ["mongoDB", "neo4j", "redis", "projectreport"]
+							
+						}]	
+});
+
+db.userAccountDetails.insert({
+								"userName":"vaibhav",
+								"emailId" :"vaibhav@gmail.com",
+								"passwordHash": "124##$56121**###",
+								"passwordChangeDateTime":new Date()
+								}
+							);
+
+
