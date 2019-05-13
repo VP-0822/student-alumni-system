@@ -52,7 +52,7 @@ app.use('/domain', userDomain);
 let userFieldSearch = require('./routes/userFieldSearch');
 app.use('/search',userFieldSearch );
 
-let userDocument = require('./routes/document');
+let userDocument = require('./routes/documents');
 app.use('/document', userDocument);
 
 let friends = require('./routes/friends');

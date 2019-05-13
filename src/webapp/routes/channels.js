@@ -26,9 +26,9 @@ router.post('/newPost', function(req, res){
 });
 
 router.get('/posts', function(req,res) {
-    var channelName = req.query.channelName;
+    var channelId = req.query.channelId;
     var view = req.query.view;
-    channelController.getPosts(req, res, channelName, view, handleSuccessResponse, handleErrorResponse);
+    channelController.getPosts(req, res, channelId, view, handleSuccessResponse, handleErrorResponse);
 });
 function handleSuccessResponse(req, res, responseData)
 {

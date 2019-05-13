@@ -4,22 +4,22 @@ const database = require('./../config/database');
 
 exports.createChannel = function(req, res, requestData, handleSuccessResponse, handleErrorResponse){
     var userName = requestData.userName;
-    var channelName = requestData.channelName;
+    var channelId = requestData.channelId;
     var nowDate = new Date();
     var queryDateAsString = nowDate.getFullYear()+"-"+nowDate.getMonth() + 1 +"-"+nowDate.getDate();
     var category = requestData.category;
     var tags = requestData.tags;
-    var query = "create (c:channel {channel_name:'"+channelName+"', category: '"+category+"', tags: "+tags+", creation_date: date('"+queryDateAsString+"')})"
+    var query = "create (c:channel {channel_id:'"+channelId+"', category: '"+category+"', tags: "+tags+", creation_date: date('"+queryDateAsString+"')})"
 
     session.run(query).then(function(result){
-        _followChannel(req, res, userName, channelName, queryDateAsString, true, false, handleSuccessResponse, handleErrorResponse);
+        _followChannel(req, res, userName, channelId, queryDateAsString, true, false, handleSuccessResponse, handleErrorResponse);
     }).catch(function(err){
         handleErrorResponse(req, res, err);
     });
 }
 
-function _followChannel(req, res, userName, channelName, queryDateAsString, isOwner, isModerator, handleSuccessResponse, handleErrorResponse) {
-    var query = "match (u:user {name:'"+userName+"'}), (c:channel {channel_name:'"+channelName+"'}) create (u) -[:FOLLOWS {since:date('"+queryDateAsString+"'), is_owner: "+isOwner+", is_moderator: "+isModerator+"}] -> (c) return u,c"
+function _followChannel(req, res, userName, channelId, queryDateAsString, isOwner, isModerator, handleSuccessResponse, handleErrorResponse) {
+    var query = "match (u:user {name:'"+userName+"'}), (c:channel {channel_id:'"+channelId+"'}) create (u) -[:FOLLOWS {since:date('"+queryDateAsString+"'), is_owner: "+isOwner+", is_moderator: "+isModerator+"}] -> (c) return u,c"
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {
@@ -34,12 +34,12 @@ function _followChannel(req, res, userName, channelName, queryDateAsString, isOw
 
 exports.followChannel = function(req, res, requestData, handleSuccessResponse, handleErrorResponse){
     var userName = requestData.userName;
-    var channelName = requestData.channelName;
+    var channelId = requestData.channelId;
     var nowDate = new Date();
     var queryDateAsString = nowDate.getFullYear()+"-"+nowDate.getMonth() + 1 +"-"+nowDate.getDate();
     var isOwner = !!requestData.isOwner;
     var isModerator = !!requestData.isModerator;
-    _followChannel(req, res, userName, channelName, queryDateAsString, isOwner, isModerator, handleSuccessResponse, handleErrorResponse);
+    _followChannel(req, res, userName, channelId, queryDateAsString, isOwner, isModerator, handleSuccessResponse, handleErrorResponse);
 }
 
 exports.getFollowedChannels = function(req, res, username, isOwner, isModerator, handleSuccessResponse, handleErrorResponse){
@@ -77,7 +77,7 @@ exports.getFollowedChannels = function(req, res, username, isOwner, isModerator,
 
 exports.createNewPost = function(req, res, requestData, handleSuccessResponse, handleErrorResponse){
     var userName = requestData.userName;
-    var channelName = requestData.channelName;
+    var channelId = requestData.channelId;
     var nowDate = new Date();
     var queryDateAsString = nowDate.getFullYear()+"-"+ (nowDate.getMonth() +1) +"-"+nowDate.getDate();
     var postData = requestData.postData;
@@ -93,7 +93,7 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
     }
     var view = requestData.view;
 
-    var query = "match (u:user {user_name:'"+userName+"'}) -[:FOLLOWS]-> (c:channel {channel_name:'"+channelName+"'}) create (u) -[:CREATED {date:date('"+queryDateAsString+"')}]-> (p:post {data:'"+postData+"', tags:"+tagsString+"}) -[:ON {view:'"+view+"'}]-> (c) return u,c,p"
+    var query = "match (u:user {user_name:'"+userName+"'}) -[:FOLLOWS]-> (c:channel {channel_id:'"+channelId+"'}) create (u) -[:CREATED {date:date('"+queryDateAsString+"')}]-> (p:post {data:'"+postData+"', tags:"+tagsString+"}) -[:ON {view:'"+view+"'}]-> (c) return u,c,p"
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {
@@ -157,8 +157,8 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
     });
 }
 
-exports.getPosts = function(req, res, channelName, view, handleSuccessResponse, handleErrorResponse){
-    var query = "match (c:channel {channel_name:'"+channelName+"'}) <-";
+exports.getPosts = function(req, res, channelId, view, handleSuccessResponse, handleErrorResponse){
+    var query = "match (c:channel {channel_id:'"+channelId+"'}) <-";
     query += "[:ON ";
     if(view && (view === 'public' || view === 'private')) {
         query += "{view ='"+view+"'}";

@@ -1,7 +1,9 @@
 const neo4j = require('neo4j-driver').v1;
 
 exports.searchUsersByType = function(req, res, type, handleSuccessResponse, handleErrorResponse){
-    var query = "match(n:user {type:'"+type+"'}) return n"
+    
+    var query = "match(n:user:"+type+") return n"
+    
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {
@@ -40,7 +42,7 @@ exports.getUsersFollowersList = function(req, res, userName, handleSuccessRespon
 }
 
 exports.getUsersFollowersSkillList = function(req, res, userName, handleSuccessResponse, handleErrorResponse){
-    var query = "match (n:user{user_name:'"+userName+"'})- [f:FOLLOWING]-> (k:user)-[:SKILLED_IN]->(p:skill) return p {.skill_name, users: collect(k {.user_name, .type})}"
+    var query = "match (n:user{user_name:'"+userName+"'})- [f:FOLLOWING]-> (k:user)-[:SKILLED_IN]->(p:skill) return p {.skill_name, users: collect(k {.user_name})}"
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {
@@ -54,7 +56,7 @@ exports.getUsersFollowersSkillList = function(req, res, userName, handleSuccessR
 }
 
 exports.getUsersEventsList = function(req, res, userName, handleSuccessResponse, handleErrorResponse){
-    var query = "match (n:user{user_name:'"+userName+"'}) - [p:PARTICIPATED_IN] ->(e:event) return n.user_name AS `User Name`, e.event_id As `Event Id`, e.event_name As `Event Name`, e.event_date.day+'/'+e.event_date.month+'/'+e.event_date.year As `Event Date`, CASE p.is_organiser WHEN true THEN 'Organiser' ELSE 'Participant' END As `Participation Type` ORDER BY e.event_date"
+    var query = "match (n:user{user_name:'"+userName+"'}) - [p:PARTICIPATED_IN] ->(e:event) return n.user_name AS `User Name`, e.event_id As `Event Id`, e.event_name As `Event Name`, e.event_date.day+'/'+e.event_date.month+'/'+e.event_date.year As `Event Date`, e.location as Location, CASE p.is_organiser WHEN true THEN 'Organiser' ELSE 'Participant' END As `Participation Type` ORDER BY e.event_date"
     session.run(query).then(function(result){
         var tableHeaderKeys;
         result.records.forEach(element => {
@@ -72,8 +74,8 @@ exports.getUsersEventsList = function(req, res, userName, handleSuccessResponse,
 
 exports.setUsersFollowers = function(req, res,sourceUser, destUser, handleSuccessResponse, handleErrorResponse){
     var nowDate = new Date();
-    var dateAsString = nowDate.getFullYear()+"-"+nowDate.getMonth()+ 1 +"-"+nowDate.getDate();
-    var query = "match (a:user{user_name:'"+sourceUser+"'}) match(v:user{user_name:'"+destUser+"'}) create (a) -[f:FOLLOWING {since: date(\""+dateAsString+"\")}] -> (v) return a,v"
+    var dateAsString = nowDate.getFullYear()+"-"+(parseInt(nowDate.getMonth()) + 1) +"-"+nowDate.getDate()+'T'+nowDate.getHours()+':'+nowDate.getMinutes() + ':' + nowDate.getSeconds() + '.' + nowDate.getMilliseconds()+ '+0100';
+    var query = "match (a:user{user_name:'"+sourceUser+"'}) match(v:user{user_name:'"+destUser+"'}) create (a) -[f:FOLLOWING {since: datetime(\""+dateAsString+"\")}] -> (v) return a,v"
     session.run(query).then(function(result){
         var returnResults = [];
         result.records.forEach(element => {
@@ -97,8 +99,8 @@ exports.unfollowList = function(req, res,sourceUser, destUser, handleSuccessResp
 
 exports.UsersParticipation = function(req, res,userName, organiser, eventId, handleSuccessResponse, handleErrorResponse){
     var nowDate = new Date();
-    var dateAsString = nowDate.getFullYear()+"-"+nowDate.getMonth()+ 1 +"-"+nowDate.getDate();
-    var query = "match (a:user{user_name:'"+userName+"'}) match(e:event{event_id:'"+eventId+"'}) create (a) -[:PARTICIPATED_IN {date: date('"+dateAsString+"')";
+    var dateAsString = nowDate.getFullYear()+"-"+(parseInt(nowDate.getMonth()) + 1) +"-"+nowDate.getDate()+'T'+nowDate.getHours()+':'+nowDate.getMinutes() + ':' + nowDate.getSeconds() + '.' + nowDate.getMilliseconds()+ '+0100';
+    var query = "match (a:user{user_name:'"+userName+"'}) match(e:event{event_id:'"+eventId+"'}) create (a) -[:PARTICIPATED_IN {date: datetime('"+dateAsString+"')";
     if(organiser === 'true' || organiser === 'True') {
         query += ", is_organiser: true";
     }
