@@ -1,6 +1,6 @@
 
 exports.findFriendsInCommon = function(req, res, userName, handleSuccessResponse, handleErrorResponse){
-    var query = "MATCH (me:user)-[:FOLLOWS]-(myFriend:user)-[:FOLLOWS]-(friendOfFriend:user) WHERE NOT (me)-[:FOLLOWS]-(friendOfFriend:user) AND me.user_name = \""+userName+"\" RETURN count(friendOfFriend) as friendsInCommon, friendOfFriend.user_name as suggestedFriend ORDER BY friendsInCommon DESC;"
+    var query ="MATCH (me:user {user_name:'"+userName+"'})-[:FOLLOWING]->(myFriend:user)-[:FOLLOWING]-(friendOfFriend:user) WHERE NOT (me)-[:FOLLOWING]-(friendOfFriend:user)  RETURN count(friendOfFriend) as `friendsInCommon`, friendOfFriend.user_name as `suggestedFriend` ORDER BY friendsInCommon DESC"
     session.run(query).then(function(result){
         var tableHeaderKeys;
         result.records.forEach(element => {

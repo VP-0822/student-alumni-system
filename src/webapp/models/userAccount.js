@@ -137,4 +137,4 @@ const userAccountSchema= mongoose.Schema({
 
     
 
-const userAccountModel = module.exports = mongoose.model('useraccount', userAccountSchema, 'useraccount');
+const UserAccountModel = module.exports = mongoose.model('userAccount', userAccountSchema, 'userAccount');

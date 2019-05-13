@@ -144,10 +144,11 @@ exports.createNewPost = function(req, res, requestData, handleSuccessResponse, h
             var returnNotificationSet = new Set();
             results.forEach(function (eachResult){
                 eachResult.forEach(function (eachUser){
-                    returnNotificationSet.add(eachUser);
+                    if(userName !== eachUser){
+                        returnNotificationSet.add(eachUser);
+                    }
                 });
             });
-            console.log(returnNotificationSet);
             handleSuccessResponse(req, res, {data: returnResults, notificationList: Array.from(returnNotificationSet)});
         }).catch(function (error) {
             handleErrorResponse(req, res, error);

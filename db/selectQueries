@@ -1,35 +1,29 @@
-Queries for user story 4 and 5 :
+1. To get all users who have failed in 1 subject-
 
-
-User story 4-:
-
-1.To get all users who have failed in 1 subject-
-
- db.progressReport.find({
-      module : {
+ db.userGrades.find({
+      scores : {
           $elemMatch: {
              
           attempts: {
                 $elemMatch:{
- "attempt_no":{ $gt: 1 }
+ "attemptNo":{ $gt: 1 }
                            }
                          }
           }
           }
       })
 
+
 2.To get all the users who have failed in a particular subject-
 
- db.progressReport.find({
-      module : {
+ db.userGrades.find({
+      scores : {
           $elemMatch: {
-             "module_name": "ACS",
+             "moduleName": "Advance Computer Science",
           attempts: {
                 $elemMatch:{
- "attempt_no":{ $gt: 1 }
-                           }
-
-                                    }
+ "attemptNo":{ $gt: 1 }
+                           }  }
           }
           }
       })
@@ -37,13 +31,13 @@ User story 4-:
 
 3.To get top 5 scorers of a particular subject-
 
-Mongo-: db.progressReport.aggregate([
-	{$unwind: '$module'},                                    
-                 {$unwind: '$module.attempts'},
-	{$sort: {"module.attempts.score": 1}},
-	{ $match : { "module.module_name" : "IPM" } },
+Mongo-: db.userGrades.aggregate([
+	{$unwind: '$scores'},                                    
+                 {$unwind: '$scores.attempts'},
+	{$sort: {"scores.attempts.score": 1}},
+	{ $match : { "scores.moduleName" : "Advance Computer Science" } },
                   { $limit : 5 } 
-                                             ])
+                                             ]).pretty()
 
 Redis-
 ZADD IPM 150 "user1"
@@ -56,74 +50,56 @@ ZADD IPM 250 "user5"
 ZRANGE IPM 0 -1
 
 
-4. To get details of a particular user-
-db.progressReport.find({user_name:"sarang"})
+4.To get details of a particular user-
 
+db.userGrades.find({userName:"sarang"})
 
-User story 5-:
+5.To get information about a particular module-
 
+db.moduleList.find({moduleName:"International Project Management"})
 
-5.To get list of all companies where users have worked- 
+6.To get list of all companies where users have worked- 
 
- db.userWorkExperience.aggregate(
+ db.userProfileDetails.aggregate(
    [
-     { $group : { _id : "$user_name", company: { $push: "$company_name" } } }
+     { $group : { _id : "$userName", company: { $push:"$workExperience.organizationName" } } }
    ]
+)
+7.To get all users who have worked in a particular domain-
+
+  db.userProfileDetails.aggregate([
+                       { $unwind: '$workExperience' },
+                        { $unwind: '$workExperience.jobTags' },
+                     { $match: {"workExperience.jobTags":"software"}}
+                      ])
+
+8.To get no.of users working in a particular company-
+
+    db.userProfileDetails.aggregate([
+                     { $match: {"workExperience.organizationName":"Samsung"}}
+                      ])
+9.To get user work experience of a particular user sorted by start date-
+
+db.userProfileDetails.aggregate(
+    { $match: {
+        "userName":"vaibhav"
+    }},
+    { $unwind: '$workExperience' },
+    { $sort: {
+        'workExperience.startDate': -1
+    }},
+{ $project : { workExperience : 1 }}
 )
 
 
-6.To get user work experience of a particular user sorted by start date-
-
-  db.userWorkExperience.aggregate([
-                    {$sort:{"start_date":1}},
-                     { $match: {"user_name":"sarang"}}
-])
-
-
-7.To get no.of users working in a particular company-
-
-    db.userWorkExperience.aggregate([
-                     { $match: {"company_name":"samsung"}}
-                      ])
+10.Insert a new module in moduleList-
+     db.moduleList.insert({
+  "moduleName":"Information Systems",
+  "moduleDescription":"hfhbdjnk",
+  "moduleProgram":"Masters",
+    "noOfCredits": 8})
 
 
-8.To get all companies which have a particular domain-
-
-  db.companyDetails.aggregate([
-                      {$unwind: '$domains'}, 
-                     { $match: {"domains":"software"}}
-                      ])
-
-
-9.To get no. of users working in a particular domain-
-
- db.companyDetails.aggregate([
-   {
-      $unwind: "$domains"
-   },
-  { $match: {"domains":"marketing"}},
-   {
-      $lookup:
-         {
-            from: "userWorkExperience",
-            localField: "company_name",
-            foreignField: "company_name",
-            as: "userworkexperience"
-        }
-   },
-   {
-   $unwind: "$userworkexperience"
-},                                                                                                                                           
-   { $group: {_id:"$domains",listofusers: {$addToSet : "$userworkexperience.user_name"}}}   
-])
-
-10.To update a particular field in user work experience.
-
-db.userWorkExperience.updateOne( {user_name:"sarang"},
-                                  {
-                                     $set: {designation: "senior analyst" , job_description:"data mining"  }
-                                                       }
-                                    )
 
  
 

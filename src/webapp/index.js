@@ -58,6 +58,9 @@ app.use('/document', userDocument);
 let friends = require('./routes/friends');
 app.use('/friends',friends);
 
+let endo = require('./routes/endorsements');
+app.use('/endorsements', endo);
+
 //start server
 app.listen(3000, function(){
     console.log('I am listening....')

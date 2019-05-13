@@ -10,8 +10,6 @@ router.get('/userDomain', function(req, res){
 });
 function handleSuccessResponse(req, res, responseData, displayMessage)
 {
-
-    console.log("success")
     if(displayMessage)
     {
         req.flash('success', displayMessage);
